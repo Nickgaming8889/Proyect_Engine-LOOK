@@ -15,6 +15,7 @@ void main() {
         printf("\n2. Inspección y Estimación de Costo.");
         printf("\n3. Almacen.");
         printf("\n4. Progreso de Reparación.");
+        printf("\n5. Salir...");
         //Pide la opción a elegir...
         printf("\nQue deseas hacer hoy?..");
         gets(opc);
@@ -28,13 +29,13 @@ void main() {
             //Datos del Cliente...
             printf("Nombre del Cliente: ");
             gets(name);
-            
+
             break;
         
         default:
             break;
         }
-    } while ();
+    } while (opc != 5);
     
 
     return 0;
