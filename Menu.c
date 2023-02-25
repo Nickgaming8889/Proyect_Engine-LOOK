@@ -1,41 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void main() {
-    
-    int opc, nsm, placa, year;
-    char nv, mdl, name;
+int main() {
+
+    int op;
 
     do
     {
-        system("cls");
-        //Opciones de menu...
-        printf("Bienvenido al Menu...\n");
-        printf("\n1. Administacion.");
+        //Secciones del menu principal...
+        printf("\nBienvenido el Menu...");
+        printf("\n\n1. Administracion.");
         printf("\n2. Almacen y Compras.");
-        printf("\n3.Salir del Programa.");
-        
-        //Pide la opción a elegir...
-        printf("\nQue deseas hacer hoy?..");
-        gets(opc);
+        printf("\n3. Salir del Programa.");
 
-        //Sección del switch (aqui ira cada caso)...
-        switch (opc) {
+        //Solicitar dato de entrada...
+        printf("\n\nSeleccione el numero del submenu.. ");
+        scanf("%i", &op);
+
+        switch (op) {
         case 1:
-            //Solicitar datos de cliente y el vehiculo...
-            printf("Registro del Cliente y/o Vehiculo:");
-
-            //Datos del Cliente...
-            printf("Nombre del Cliente: ");
-            gets(name);
-
+            printf("\nEstas en Administracion.");
             break;
-        
+        case 2:
+            printf("\nEstas en Almacen y Compras.");
+            break;
+        case 3:
+            printf("\nHaz salido del programa.");
+            break;
         default:
             break;
         }
-    } while (opc != 5);
+    } while (op != 3);
     
 
     return 0;
 }
+
+
