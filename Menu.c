@@ -11,11 +11,10 @@ void main() {
         system("cls");
         //Opciones de menu...
         printf("Bienvenido al Menu...\n");
-        printf("\n1. Registro del Cliente y/o Vehiculo.");
-        printf("\n2. Inspección y Estimación de Costo.");
-        printf("\n3. Almacen.");
-        printf("\n4. Progreso de Reparación.");
-        printf("\n5. Salir...");
+        printf("\n1. Administacion.");
+        printf("\n2. Almacen y Compras.");
+        printf("\n3.Salir del Programa.");
+        
         //Pide la opción a elegir...
         printf("\nQue deseas hacer hoy?..");
         gets(opc);
