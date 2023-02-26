@@ -20,6 +20,11 @@ int main() {
         switch (op) {
         case 1:
             printf("\nEstas en Administracion.");
+                do
+                {
+                    
+                } while ();
+                
             break;
         case 2:
             printf("\nEstas en Almacen y Compras.");
