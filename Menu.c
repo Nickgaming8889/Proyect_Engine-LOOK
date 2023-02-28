@@ -35,7 +35,8 @@ int main() {
                     //Solicitar dato de entrada al area requerida...
                     printf("\n\nSeleccione la opcion que necesite: ");
                     scanf("%i", &op);
-
+                    
+                    //Caso según la opción elegida...
                     switch (op) {
                     case 1:
                         system("cls");
@@ -74,9 +75,11 @@ int main() {
                     printf("\n2. Comprar piezas.");
                     printf("\n3. Volver al menu principal.");
 
+                    //Solicitar dato de entrada al area requerida...
                     printf("\n\nSelecione la opcion que necesite: ");
                     scanf("%i", &op);
-
+                    
+                    //Caso según la opción elegida...
                     switch (op) {
                     case 1:
                         system("cls");
