@@ -1,5 +1,104 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <windows.h>
+
+#define LONGITUD 6
+#define USER_NAME 1
+#define INTENTOS 3
+
+//GOTOXY
+void gotoxy(int x,int y){
+
+    HANDLE Ventana;
+    COORD Coordenates;
+    Ventana = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    Coordenates.X = x;
+    Coordenates.Y = y;
+
+    SetConsoleCursorPosition(Ventana,Coordenates);
+}
+
+//Función Logo...
+int logo(){
+    
+    system("cls");
+    gotoxy(42,2);
+    printf("*****");
+    gotoxy(40,3);
+    printf("***   ***");
+    gotoxy(39,4);
+    printf("**   X   **");
+    gotoxy(40,5);
+    printf("***   ***");
+    gotoxy(42,6);
+    printf("*******");
+    gotoxy(47,7);
+    printf("***");
+    gotoxy(48,8);
+    printf("***");
+    gotoxy(49,9);
+    printf("***");
+    gotoxy(40,12);
+    printf("ENGINE LOOK");
+
+    getch();
+
+    return 0;
+}
+
+//Función Load Page...
+int load_page() {
+
+    system("cls");
+    gotoxy(40,3);
+    printf("Welcome to Engine LOOK");
+    gotoxy(43,4);
+    printf("Loading Program...");
+    gotoxy(31,6);
+    printf("Created by: Nicholas Caceres Version 1.23");
+
+    return 0;
+}
+
+//Función Log_In...
+int log_in() {
+
+    char user[LONGITUD + 1][USER_NAME];
+    char password[LONGITUD + 1][USER_NAME];
+    int enter = 0, try = 0; 
+
+    do {
+        system("cls");
+        printf("Log In... \n");
+        printf("Username: ");
+        scanf("%s", &user);
+        printf("Password: ");
+        scanf("%s", &password);
+
+        if (strcmp(user, "Nicolas") == 0 && strcmp(password, "12345") == 0){
+            enter = 1;
+            break;
+        }
+        else if (enter == 0) {
+            printf("\n\tUsuario y/o clave son incorrectos\n");
+            try++;
+            system("pause");
+            getchar();
+        }
+        
+    }while (try < INTENTOS && enter == 0);
+
+    if (enter == 1) {
+        printf("\nBienvenido al Sistema...");
+    }
+    else {
+        printf("\nLimite Excedido...");
+    }
+
+    return 0;
+}
 
 //Función Registro...
 int Registro() {
@@ -47,6 +146,15 @@ int Registro() {
 }
 
 int main() {
+
+    fflush(stdin);
+    logo();
+
+    fflush(stdin);
+    load_page();
+
+    fflush(stdin);
+    log_in();
 
     int op;
 
