@@ -22,7 +22,7 @@ void gotoxy(int x,int y){
 
 //Función Logo...
 int logo(){
-    
+
     system("cls");
     gotoxy(42,2);
     printf("*****");
@@ -63,19 +63,19 @@ int load_page() {
 }
 
 //Función Log_In...
-int log_in() {
+char log_in() {
 
     char user[LONGITUD + 1][USER_NAME];
     char password[LONGITUD + 1][USER_NAME];
-    int enter = 0, try = 0; 
+    int enter = 0, try = 0;
 
     do {
         system("cls");
         printf("Log In... \n");
         printf("Username: ");
-        scanf("%s", &user);
+        scanf("%s",&user);
         printf("Password: ");
-        scanf("%s", &password);
+        scanf("%s",&password);
 
         if (strcmp(user, "Nicolas") == 0 && strcmp(password, "12345") == 0){
             enter = 1;
@@ -87,7 +87,7 @@ int log_in() {
             system("pause");
             getchar();
         }
-        
+
     }while (try < INTENTOS && enter == 0);
 
     if (enter == 1) {
@@ -101,7 +101,7 @@ int log_in() {
 }
 
 //Función Registro...
-int Registro() {
+char Registro() {
     int i = 0, j;
     char name_clt[80], mk[50], nsm[20], plt[12], year[4];
 
@@ -184,11 +184,11 @@ int main() {
                     printf("\n3. Cotizacion de reparacion.");
                     printf("\n4. Proceso de Trabajo.");
                     printf("\n5. Volver al menu principal.");
-                    
+
                     //Solicitar dato de entrada al area requerida...
                     printf("\n\nSeleccione la opcion que necesite: ");
                     scanf("%i", &op);
-                    
+
                     //Caso según la opción elegida...
                     switch (op) {
                     case 1:
@@ -221,7 +221,7 @@ int main() {
                     }
 
                 } while (op != 5);
-                
+
             break;
         case 2:
             system("cls");
@@ -235,7 +235,7 @@ int main() {
                     //Solicitar dato de entrada al area requerida...
                     printf("\n\nSelecione la opcion que necesite: ");
                     scanf("%i", &op);
-                    
+
                     //Caso según la opción elegida...
                     switch (op) {
                     case 1:
@@ -265,7 +265,7 @@ int main() {
             break;
         }
     } while (op != 3);
-    
+
 
     return 0;
 }

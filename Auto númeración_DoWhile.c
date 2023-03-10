@@ -3,7 +3,7 @@
 
 int Registro() {
     int i = 0, j;
-    char name_clt[80], mk[50], nsm[20], plt[12], year[4];
+    char name_clt[80], mk[50], nsm[20], plt[10], year[4], tel[10];
 
     do{
         i++;
@@ -11,9 +11,11 @@ int Registro() {
         printf("No. Cliente %i\n", i);
         puts("Nombre del Cliente: ");
         gets(name_clt);
+        puts("Número de telefono: ");
+        gets(tel);
         puts("Modelo del Vehiculo: ");
         gets(mk);
-        puts("Año del Vehiculo");
+        puts("Año del Vehiculo: ");
         gets(year);
         puts("No. de Serie del Motor: ");
         gets(nsm);
