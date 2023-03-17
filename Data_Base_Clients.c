@@ -6,6 +6,7 @@ struct clients{
     char mk[50];
     char nsm[20];
     char plt[10];
-    char year[4];
+    int year;
     char tel[10];
 };
+
