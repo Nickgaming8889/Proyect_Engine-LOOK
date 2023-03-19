@@ -10,3 +10,17 @@ struct clients{
     char tel[10];
 };
 
+struct clients n_o[100];
+
+int main() {
+
+    int i, back = 0;
+
+    do
+    {
+        /* code */
+    } while ();
+    
+
+    return 0;
+}
