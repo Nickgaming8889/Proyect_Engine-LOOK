@@ -7,6 +7,17 @@
 #define USER_NAME 1
 #define INTENTOS 3
 
+struct clients{
+    char name_clt[80];
+    char mk[50];
+    char nsm[20];
+    char plt[10];
+    char year[4];
+    char tel[10];
+};
+
+struct clients n_o[100];
+
 //GOTOXY
 void gotoxy(int x,int y){
 
@@ -101,46 +112,46 @@ char log_in() {
 }
 
 //Función Registro...
-char Registro() {
-    int i = 0, j;
-    char name_clt[80], mk[50], nsm[20], plt[12], year[4];
+char Registro_Clients() {
 
-    do{
-        i++;
+    int i, j, back = 1, end = 0;
+
+    do
+    {
         system("cls");
-        printf("No. Cliente %i\n", i);
-        puts("Nombre del Cliente: ");
-        gets(name_clt);
-        puts("Modelo del Vehiculo: ");
-        gets(mk);
-        puts("Año del Vehiculo");
-        gets(year);
-        puts("No. de Serie del Motor: ");
-        gets(nsm);
-        puts("Placas: ");
-        gets(plt);
+        for (i = back; i <= 100&&end != 1; i++)
+        {
+            printf("Client Number: %d", i);
+            puts("\nClient Name: ");
+            gets(n_o[i].name_clt);
+            puts("Client Phone: ");
+            gets(n_o[i].tel);
+            puts("Vehicle Name: ");
+            gets(n_o[i].mk);
+            puts("Engine Serie: ");
+            gets(n_o[i].nsm);
+            puts("Year: ");
+            gets(n_o[i].year);
+            puts("license Plate: ");
+            gets(n_o[i].plt);
 
-        printf("1.Salir.");
-        printf("\nDeseas salir? ");
-        scanf("%i", &j);
+            printf("\n\nDo you want to continue adding? Yes[1]/No[2] ");
+            scanf("%d",&j);
 
-        if (j == 1) {
-            goto finish;
+            if (j == 1) {
+                fflush(stdin);
+            }
+            else if (j == 2) {
+                goto finish;
+            }
         }
-        else {
-            fflush(stdin);
-        }
+    } while (i != 101);
 
-    } while (i <= 100);
-
+    if (i == 100) {
+        printf("Client Limit is full now...");
+    }
+    
     finish:
-
-    printf("\n\nNo. Cliente: %i", i);
-    printf("\nNombre del Cliente: %s", name_clt);
-    printf("\nModelo del Vehiculo: %s", mk);
-    printf("\nPlacas de Vehiculo: %s\n\n", plt);
-
-    system("pause");
 
     return 0;
 }
@@ -196,7 +207,7 @@ int main() {
                         printf("\nEstas en Registro de Cliente...\n");
 
                             fflush(stdin);
-                            Registro();
+                            Registro_Clients();
 
                         break;
                     case 2:
