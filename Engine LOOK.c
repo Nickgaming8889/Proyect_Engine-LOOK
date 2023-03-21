@@ -4,10 +4,10 @@
 #include <windows.h>
 
 #define LONGITUD 6
-#define USER_NAME 1
 #define INTENTOS 3
 
 struct clients{
+    int num_clt;
     char name_clt[80];
     char mk[50];
     char nsm[20];
@@ -52,9 +52,9 @@ int logo(){
     gotoxy(49,9);
     printf("***");
     gotoxy(40,12);
-    printf("ENGINE LOOK");
+    printf("\nENGINE LOOK");
 
-    getch();
+    system("pause");
 
     return 0;
 }
@@ -76,17 +76,17 @@ int load_page() {
 //Función Log_In...
 char log_in() {
 
-    char user[LONGITUD + 1][USER_NAME];
-    char password[LONGITUD + 1][USER_NAME];
+    char user[LONGITUD + 1];
+    char password[LONGITUD + 1];
     int enter = 0, try = 0;
 
     do {
         system("cls");
         printf("Log In... \n");
         printf("Username: ");
-        scanf("%s",&user);
+        scanf("%s",user);
         printf("Password: ");
-        scanf("%s",&password);
+        scanf("%s",password);
 
         if (strcmp(user, "Nicolas") == 0 && strcmp(password, "12345") == 0){
             enter = 1;
@@ -113,15 +113,16 @@ char log_in() {
 
 //Función Registro...
 char Registro_Clients() {
-
-    int i, j, back = 1, end = 0;
+ 
+    int i, o, back = 1, end = 0;
 
     do
     {
         system("cls");
-        for (i = back; i <= 100&&end != 1; i++)
+        fflush(stdin);
+        for (i = back; i <= n_o&&end != 1; i++)
         {
-            printf("Client Number: %d", i);
+            printf("Client Number: %i", n_o[i].num_clt);
             puts("\nClient Name: ");
             gets(n_o[i].name_clt);
             puts("Client Phone: ");
@@ -136,12 +137,12 @@ char Registro_Clients() {
             gets(n_o[i].plt);
 
             printf("\n\nDo you want to continue adding? Yes[1]/No[2] ");
-            scanf("%d",&j);
+            scanf("%d",&o);
 
-            if (j == 1) {
+            if (o == 1) {
                 fflush(stdin);
             }
-            else if (j == 2) {
+            else if (o == 2) {
                 goto finish;
             }
         }
