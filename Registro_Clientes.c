@@ -74,6 +74,7 @@ int main() {
                 printf("Client Name: ");
                 scanf("%s", newClient.name_clt);
                 printf("Client Phone: ");
+                fflush(stdin);
                 scanf("%s", newClient.phone);
                 printf("Vehicle: ");
                 scanf("%s", newClient.mk);
