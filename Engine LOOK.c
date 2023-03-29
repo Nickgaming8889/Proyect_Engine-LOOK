@@ -4,8 +4,18 @@
 #include <windows.h>
 
 #define LONGITUD 6
-#define USER_NAME 1
 #define INTENTOS 3
+#define NUM_CLT 100
+
+//Estructuras...
+struct Clients{
+    char name_clt[80];
+    char mk[50];
+    char nsm[20];
+    char plt[10];
+    char year[4];
+    char phone[11];
+};
 
 //GOTOXY
 void gotoxy(int x,int y){
@@ -65,8 +75,8 @@ int load_page() {
 //Función Log_In...
 int log_in() {
 
-    char user[LONGITUD + 1][USER_NAME];
-    char password[LONGITUD + 1][USER_NAME];
+    char user[LONGITUD + 1];
+    char password[LONGITUD + 1];
     int enter = 0, try = 0; 
 
     do {
@@ -100,63 +110,138 @@ int log_in() {
     return 0;
 }
 
+//Funciones para el Registro y Baja...
+int registro(struct Clients newClient, struct Clients n_o[], int *num_clt) {
+    if (*num_clt >= NUM_CLT) {
+        printf("\nExceeded Limit...");
+    }
+    else {
+        n_o[*num_clt] = newClient;
+        (*num_clt)++;
+        printf("\nSuccessfully Register...");
+    }
+    return 0;
+}
+
+int delete(int clientNum, struct Clients n_o[], int *num_clt) {
+    if (clientNum < 0 || clientNum >= *num_clt) {
+        printf("Invalid Client Number...");
+    }
+    else {
+        for (int i = clientNum; i < *num_clt; i++) {
+            n_o[i] = n_o[i + 1];   
+        }
+        (*num_clt)--;
+        printf("The user has been delete...");
+    }
+    return 0;
+}
+
+char view(struct Clients user){
+    printf("\n\nClient Name: %s\n", user.name_clt);
+    printf("Phone: %s\n", user.phone);
+    printf("Car: %s\n", user.mk);
+    printf("Year: %s\n", user.year);
+    printf("License Plates: %s\n", user.plt);
+    printf("Series Number: %s\n", user.nsm);
+    
+    return 0;
+}
+
 //Función Registro...
 int Registro() {
-    int i = 0, j;
-    char name_clt[80], mk[50], nsm[20], plt[12], year[4];
+    struct Clients n_o[NUM_CLT];
 
-    do{
-        i++;
+    int op, num_clt = 0, i = 0;
+    char buffer[100];
+
+    struct Clients newClient;
+
+    do
+    {
         system("cls");
-        printf("No. Cliente %i\n", i);
-        puts("Nombre del Cliente: ");
-        gets(name_clt);
-        puts("Modelo del Vehiculo: ");
-        gets(mk);
-        puts("Año del Vehiculo");
-        gets(year);
-        puts("No. de Serie del Motor: ");
-        gets(nsm);
-        puts("Placas: ");
-        gets(plt);
-
-        printf("1.Salir.");
-        printf("\nDeseas salir? ");
-        scanf("%i", &j);
-
-        if (j == 1) {
-            goto finish;
-        }
-        else {
-            fflush(stdin);
+        printf("\n1. Register Client.");
+        printf("\n2. Delete Client.");
+        printf("\n3. Search Client.");
+        printf("\n4. Exit");
+        printf("\n\nWhat do you want to do? ");
+        
+        if (scanf("%d", &op) != 1) {
+            printf("Invalid option, please put a number... ");
+            fgets(buffer, sizeof(buffer), stdin);
+            system("pause");
+            continue;
         }
 
-    } while (i <= 100);
+        switch (op) {
+            case 1: {
+                system("cls");
 
-    finish:
+                printf("Client Name: ");
+                scanf("%s", newClient.name_clt);
+                printf("Client Phone: ");
+                fflush(stdin);
+                scanf("%s", newClient.phone);
+                printf("Vehicle: ");
+                scanf("%s", newClient.mk);
+                printf("Year: ");
+                scanf("%s", newClient.year);
+                printf("Engine Series Number: ");
+                scanf("%s", newClient.nsm);
+                printf("License Plates: ");
+                scanf("%s", newClient.plt);
+                fflush(stdin);
 
-    printf("\n\nNo. Cliente: %i", i);
-    printf("\nNombre del Cliente: %s", name_clt);
-    printf("\nModelo del Vehiculo: %s", mk);
-    printf("\nPlacas de Vehiculo: %s\n\n", plt);
+                registro(newClient, n_o, &num_clt);
 
-    system("pause");
+                printf("\n\nDo you want to continue adding? YES[1]/NO[2]: ");
+                scanf("%i",&i);
+                break;
+            }
+            case 2: {
+                int clientNum;
+                printf("Enter the client number (%d): ", num_clt -1);
+                scanf("%d",&clientNum);
+                fflush(stdin);
+
+                delete(clientNum, n_o, &num_clt);
+                break;
+            }
+            case 3: {
+                int clientNum;
+
+                printf("\nClients Search...\n");
+                printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
+                scanf("%i",&clientNum);
+
+                if (clientNum >= 0 && clientNum < num_clt) {
+                    printf("Client %d:\n", clientNum);
+                    view(n_o[clientNum]);
+                }
+                else if (clientNum != -1) {
+                    printf("Invalid Client Number. \n");
+                }
+
+                system("pause");
+                break;
+            }
+        }
+    } while (op != 4);
 
     return 0;
 }
 
 int main() {
 
-    fflush(stdin);
     logo();
 
-    fflush(stdin);
     load_page();
 
     fflush(stdin);
     log_in();
 
     int op;
+    char buffer[100];
 
     do
     {
@@ -170,7 +255,13 @@ int main() {
 
         //Solicitar dato de entradaa submenu...
         printf("\n\nSeleccione el numero del submenu.. ");
-        scanf("%i", &op);
+
+        if (scanf("%d", &op) != 1) {
+            printf("Invalid option, please put a number... \n");
+            fgets(buffer, sizeof(buffer), stdin);
+            system("pause");
+            continue;
+        }
 
         //Redireccion al submenu...
         switch (op) {
@@ -187,13 +278,17 @@ int main() {
                     
                     //Solicitar dato de entrada al area requerida...
                     printf("\n\nSeleccione la opcion que necesite: ");
-                    scanf("%i", &op);
                     
+                    if (scanf("%d", &op) != 1) {
+                        printf("Invalid option, please put a number... \n");
+                        fgets(buffer, sizeof(buffer), stdin);
+                        system("pause");
+                    }
                     //Caso según la opción elegida...
                     switch (op) {
                     case 1:
                         system("cls");
-                        printf("\nEstas en Registro de Cliente...\n");
+                        printf("\nEstas en Registro y Baja de Cliente...\n");
 
                             fflush(stdin);
                             Registro();
@@ -201,17 +296,13 @@ int main() {
                         break;
                     case 2:
                         system("cls");
-                        printf("\nEstas en Baja de Cliente...\n");
-                        break;
-                    case 3:
-                        system("cls");
                         printf("\nEstas en Cotizacion de Reparacion...\n");
-                        break;
-                    case 4:
+                        break; 
+                    case 3:
                         system("cls");
                         printf("\nEstas en Proceso de Trabajo...\n");
                         break;
-                    case 5:
+                    case 4:
                         system("cls");
                         goto main_menu;
                         break;
@@ -234,7 +325,12 @@ int main() {
 
                     //Solicitar dato de entrada al area requerida...
                     printf("\n\nSelecione la opcion que necesite: ");
-                    scanf("%i", &op);
+
+                    if (scanf("%d", &op) != 1) {
+                        printf("Invalid option, please put a number... \n");
+                        fgets(buffer, sizeof(buffer), stdin);
+                        system("pause");
+                    }
                     
                     //Caso según la opción elegida...
                     switch (op) {
