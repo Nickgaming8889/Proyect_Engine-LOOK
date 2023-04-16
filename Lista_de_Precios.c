@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct List_of_Prices {
-    int id;
-    char desc[50];
-    int price;
-};
-
 int main() {
 
-    FILE *file = fopen("data.txt", "r");
+    char ch;
+    FILE *file;
+
+    file = fopen("tttt.txt", "r");
     if (file == NULL) {
-        printf("Error opening file...");
-        return 1;
+        printf("Error al leer...");
+        exit(1);
     }
 
-    struct List_of_Prices List[100];
-    int i; 
+    while (ch != EOF) {
+        ch = fgetc(file);
+        printf("%c", ch);
+    }
 
-    
+    fclose(file);
+
+    system("pause");
     return 0;
 }
