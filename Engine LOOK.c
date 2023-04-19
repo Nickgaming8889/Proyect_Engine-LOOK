@@ -148,6 +148,27 @@ char view(struct Clients user){
     return 0;
 }
 
+int Cost() {
+
+    struct Clients n_o[NUM_CLT];
+
+    int clientNum, num_clt = 0;
+
+    printf("\nClients Search...\n");
+    printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
+    scanf("%i",&clientNum);
+
+    if (clientNum >= 0 && clientNum < num_clt) {
+        printf("Client %d:\n", clientNum);
+        view(n_o[clientNum]);
+    }
+    else if (clientNum != -1) {
+        printf("Invalid Client Number. \n");
+    }
+    
+    system("pause");
+}
+
 //Función Registro...
 int Registro() {
     struct Clients n_o[NUM_CLT];
@@ -297,6 +318,8 @@ int main() {
                     case 2:
                         system("cls");
                         printf("\nEstas en Cotizacion de Reparacion...\n");
+
+                            fflush(stdin);
                         break; 
                     case 3:
                         system("cls");
