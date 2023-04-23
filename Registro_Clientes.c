@@ -51,7 +51,7 @@ char view(struct Clients user){
 }
 
 int cost(struct Clients usercost) {
-    
+    int i;
 }
 
 int main() {
