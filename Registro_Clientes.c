@@ -50,6 +50,10 @@ char view(struct Clients user){
     return 0;
 }
 
+int cost(struct Clients usercost) {
+    
+}
+
 int main() {
     struct Clients n_o[NUM_CLT];
 
