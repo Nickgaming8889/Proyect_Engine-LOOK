@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define NUM_CLT 100
 
@@ -50,9 +49,9 @@ char view(struct Clients user){
     return 0;
 }
 
-int cost(struct Clients usercost) {
+/*int cost(struct Clients usercost) {
     int i;
-}
+}*/
 
 int main() {
     struct Clients n_o[NUM_CLT];
@@ -64,7 +63,7 @@ int main() {
 
     do
     {
-        system("cls");
+        system("clear");
         printf("\n1. Register Client.");
         printf("\n2. Delete Client.");
         printf("\n3. Search Client.");
@@ -80,7 +79,7 @@ int main() {
 
         switch (op) {
             case 1: {
-                system("cls");
+                system("clear");
 
                 printf("Client Name: ");
                 scanf("%s", newClient.name_clt);
@@ -127,7 +126,7 @@ int main() {
                     printf("Invalid Client Number. \n");
                 }
 
-                system("pause");
+                //system("pause");
                 break;
             }
         }
