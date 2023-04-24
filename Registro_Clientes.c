@@ -13,6 +13,11 @@ struct Clients{
     char phone[11];
 };
 
+typedef struct{
+    int id;
+    float price;
+}Cost;
+
 int registro(struct Clients newClient, struct Clients n_o[], int *num_clt) {
     if (*num_clt >= NUM_CLT) {
         printf("\nExceeded Limit...");
@@ -50,12 +55,18 @@ char view(struct Clients user){
     return 0;
 }
 
-int cost(struct Clients usercost) {
-    int i;
+void cost(struct Clients user) {
+    printf("\n\nClient Name: %s\n", user.name_clt);
+    printf("Phone: %s\n", user.phone);
+    printf("Car: %s\n", user.mk);
+    printf("Year: %s\n", user.year);
+    printf("License Plates: %s\n", user.plt);
+    printf("Series Number: %s\n", user.nsm);
 }
 
 int main() {
     struct Clients n_o[NUM_CLT];
+    //Cost prices;
 
     int op, num_clt = 0, i = 0;
     char buffer[100];
@@ -90,6 +101,7 @@ int main() {
                 printf("Vehicle: ");
                 scanf("%s", newClient.mk);
                 printf("Year: ");
+                fflush(stdin);
                 scanf("%s", newClient.year);
                 printf("Engine Series Number: ");
                 scanf("%s", newClient.nsm);
@@ -115,6 +127,7 @@ int main() {
             case 3: {
                 int clientNum;
 
+                system("cls");
                 printf("\nClients Search...\n");
                 printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
                 scanf("%i",&clientNum);
@@ -130,8 +143,27 @@ int main() {
                 system("pause");
                 break;
             }
+            case 4: {
+                int clientNum;
+
+                system("cls");
+                printf("\nClients Search...\n");
+                printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
+                scanf("%i",&clientNum);
+
+                if (clientNum >= 0 && clientNum < num_clt) {
+                    printf("Client %d:\n", clientNum);
+                    cost(n_o[clientNum]);
+                }
+                else if (clientNum != -1) {
+                    printf("Invalid Client Number. \n");
+                }
+
+                system("pause");
+                break;
+            }
         }
-    } while (op != 4);
+    } while (op != 5);
 
     return 0;
 }

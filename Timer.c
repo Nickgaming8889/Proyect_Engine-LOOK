@@ -8,7 +8,7 @@ int main() {
     for (i = 1; i <= total; i++) {
         printf("Progress [%-20s] %d%%\r", "====================", i);
         fflush(stdout);
-        Sleep(1);
+        Sleep(200);
     }
 
     return 0;
