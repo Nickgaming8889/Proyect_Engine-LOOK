@@ -206,6 +206,7 @@ int Registro() {
                 printf("Vehicle: ");
                 scanf("%s", newClient.mk);
                 printf("Year: ");
+                fflush(stdin);
                 scanf("%s", newClient.year);
                 printf("Engine Series Number: ");
                 scanf("%s", newClient.nsm);
