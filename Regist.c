@@ -50,7 +50,7 @@ char view(struct Clients user){
     return 0;
 }
 
-int main() {
+int Registro() {
     struct Clients n_o[NUM_CLT];
 
     int op, num_clt = 0, i = 0;
@@ -66,8 +66,7 @@ int main() {
         printf("\n3. Search Client.");
         printf("\n4. Exit");
         printf("\n\nWhat do you want to do? ");
-        scanf("%d",&op);
-
+        
         if (scanf("%d", &op) != 1) {
             printf("Invalid option, please put a number... ");
             fgets(buffer, sizeof(buffer), stdin);

@@ -293,10 +293,9 @@ int main() {
                 do
                 {
                     printf("\n1. Registro del cliente.");
-                    printf("\n2. Baja de cliente.");
-                    printf("\n3. Cotizacion de reparacion.");
-                    printf("\n4. Proceso de Trabajo.");
-                    printf("\n5. Volver al menu principal.");
+                    printf("\n2. Cotizacion de reparacion.");
+                    printf("\n3. Proceso de Trabajo.");
+                    printf("\n4. Volver al menu principal.");
                     
                     //Solicitar dato de entrada al area requerida...
                     printf("\n\nSeleccione la opcion que necesite: ");
