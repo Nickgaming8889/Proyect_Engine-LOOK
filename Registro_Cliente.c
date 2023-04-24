@@ -8,8 +8,8 @@ typedef struct{
     char mk[50];
     char nsm[20];
     char plt[10];
-    char year[4];
-    char phone[11];
+    char year[20];
+    char phone[20];
 }Clients;
 
 int registro( Clients newClient, Clients n_o[], int *num_clt) {
@@ -41,6 +41,7 @@ int delete(int clientNum, Clients n_o[], int *num_clt) {
 char view(Clients user){
     printf("\n\nClient Name: %s\n", user.name_clt);
     printf("Phone: %s\n", user.phone);
+    printf("Phone: %s\n", user.phone);
     printf("Car: %s\n", user.mk);
     printf("Year: %s\n", user.year);
     printf("License Plates: %s\n", user.plt);
@@ -51,9 +52,10 @@ char view(Clients user){
 
 int main() {
     Clients n_o[NUM_CLT];
+    int ret;
 
     int op, num_clt = 0, i = 0;
-    char buffer[100];
+    char buffer[100]; 
 
     Clients newClient;
 
@@ -66,10 +68,12 @@ int main() {
         printf("\n4. Exit");
         printf("\n\nWhat do you want to do? ");
         
-        if (scanf("%d", &op) != 1) {
+        ret = scanf("%d", &op);
+        while (getchar() != '\n');
+        if (ret != 1) {
             printf("Invalid option, please put a number... ");
             fgets(buffer, sizeof(buffer), stdin);
-            system("pause");
+            //system("pause");
             continue;
         }
 
@@ -78,10 +82,12 @@ int main() {
                 system("cls");
 
                 printf("Client Name: ");
-                scanf("%s", newClient.name_clt);
+                fgets(newClient.name_clt, sizeof(newClient.name_clt), stdin);
                 printf("Client Phone: ");
-                fflush(stdin);
+                //fflush(stdin);
                 scanf("%s", newClient.phone);
+                while (getchar() != '\n');
+                printf("Phone: %s\n", newClient.phone);
                 printf("Vehicle: ");
                 scanf("%s", newClient.mk);
                 printf("Year: ");
@@ -90,7 +96,7 @@ int main() {
                 scanf("%s", newClient.nsm);
                 printf("License Plates: ");
                 scanf("%s", newClient.plt);
-                fflush(stdin);
+                //fflush(stdin);
 
                 printf("\n\nClient Name: %s\n", newClient.name_clt);
                 printf("Phone: %s\n", newClient.phone);
@@ -103,13 +109,14 @@ int main() {
 
                 printf("\n\nDo you want to continue adding? YES[1]/NO[2]: ");
                 scanf("%i",&i);
+                while (getchar() != '\n');
                 break;
             }
             case 2: {
                 int clientNum;
                 printf("Enter the client number (%d): ", num_clt -1);
                 scanf("%d",&clientNum);
-                fflush(stdin);
+                while (getchar() != '\n');
 
                 delete(clientNum, n_o, &num_clt);
                 break;

@@ -6,6 +6,13 @@ typedef struct{
     float price;
 }Article;
 
+void cost(Article data) {
+
+    printf("Cotizacion de rectificacion\n");
+    
+
+}
+
 int main(int argc, char *argv[]) {
     
     FILE *file = fopen("example.txt", "r");
