@@ -89,7 +89,7 @@ int main() {
                 while (getchar() != '\n');
                 printf("Phone: %s\n", newClient.phone);
                 printf("Vehicle: ");
-                scanf("%s", newClient.mk);
+                fgets(newClient.mk, sizeof(newClient.mk), stdin);
                 printf("Year: ");
                 scanf("%s", newClient.year);
                 printf("Engine Series Number: ");
