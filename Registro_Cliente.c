@@ -40,12 +40,12 @@ int delete(int clientNum, Clients n_o[], int *num_clt) {
 
 char view(Clients user){
     printf("\n\nClient Name: %s\n", user.name_clt);
-    printf("Phone: %s\n", user.phone);
-    printf("Phone: %s\n", user.phone);
+    printf("Phone: %s\n\n", user.phone);
     printf("Car: %s\n", user.mk);
-    printf("Year: %s\n", user.year);
-    printf("License Plates: %s\n", user.plt);
-    printf("Series Number: %s\n", user.nsm);
+    printf("Year: %s\n\n", user.year);
+    printf("License Plates: %s\n\n", user.plt);
+    printf("Series Number: %s\n\n", user.nsm);
+
     
     return 0;
 }
@@ -97,13 +97,6 @@ int main() {
                 printf("License Plates: ");
                 scanf("%s", newClient.plt);
                 //fflush(stdin);
-
-                printf("\n\nClient Name: %s\n", newClient.name_clt);
-                printf("Phone: %s\n", newClient.phone);
-                printf("Car: %s\n", newClient.mk);
-                printf("Year: %s\n", newClient.year);
-                printf("License Plates: %s\n", newClient.plt);
-                printf("Series Number: %s\n", newClient.nsm);
 
                 registro(newClient, n_o, &num_clt);
 
