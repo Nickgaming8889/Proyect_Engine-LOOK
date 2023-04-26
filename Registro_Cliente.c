@@ -73,7 +73,6 @@ int main() {
         if (ret != 1) {
             printf("Invalid option, please put a number... ");
             fgets(buffer, sizeof(buffer), stdin);
-            //system("pause");
             continue;
         }
 
@@ -84,7 +83,6 @@ int main() {
                 printf("Client Name: ");
                 fgets(newClient.name_clt, sizeof(newClient.name_clt), stdin);
                 printf("Client Phone: ");
-                //fflush(stdin);
                 scanf("%s", newClient.phone);
                 while (getchar() != '\n');
                 printf("Phone: %s\n", newClient.phone);
@@ -96,7 +94,6 @@ int main() {
                 scanf("%s", newClient.nsm);
                 printf("License Plates: ");
                 scanf("%s", newClient.plt);
-                //fflush(stdin);
 
                 registro(newClient, n_o, &num_clt);
 

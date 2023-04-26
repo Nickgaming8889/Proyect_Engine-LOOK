@@ -7,6 +7,8 @@ typedef struct {
 
 int variables(RorN var) {
     var.
+
+    return 0;
 }
 
 bool vld() {
