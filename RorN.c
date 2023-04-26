@@ -2,11 +2,11 @@
 #include <stdbool.h>
 
 typedef struct {
-    
+    float compressionreferency;
 }RorN;
 
 int variables(RorN var) {
-    var.
+    var.compressionreferency = 120.0;
 
     return 0;
 }
