@@ -9,17 +9,24 @@
 
 //Estructuras...
 typedef struct {
+    char wash[10];
+    char larges[10];
+}Process;
+
+typedef struct{
     char name_clt[80];
     char mk[50];
     char nsm[20];
     char plt[10];
-    char year[4];
-    char phone[11];
+    char year[20];
+    char phone[20];
+    Process works;
 }Clients;
 
 typedef struct{
     int id;
     char name[50];
+    int num_part;
     float price;
 }Article;
 
@@ -154,6 +161,7 @@ char view(Clients user){
     return 0;
 }
 
+//Función Cotización...
 int Cost() {
 
     Clients n_o[NUM_CLT];
@@ -175,6 +183,17 @@ int Cost() {
     system("pause");
 }
 
+//Función Progreso...
+char process(Clients *user) {
+
+    printf("\nThe engine is already clean? Y(1)/N(2) ");
+    scanf("%s", user->works.wash);
+    printf("Larges are already taked? Y(1)/N(2) ");
+    scanf("%s", user->works.larges);
+
+    return 0;
+}
+
 //Función Registro...
 int Registro() {
     Clients n_o[NUM_CLT];
@@ -187,11 +206,13 @@ int Registro() {
 
     do
     {
-        system("cls");
+        //system("cls");
         printf("\n1. Register Client.");
         printf("\n2. Delete Client.");
         printf("\n3. Search Client.");
-        printf("\n4. Exit");
+        printf("\n4. Progress Work.");
+        printf("\n5. Repair Cost.");
+        printf("\n6. Exit.");
         printf("\n\nWhat do you want to do? ");
         
         ret = scanf("%d", &op);
@@ -255,8 +276,34 @@ int Registro() {
                 system("pause");
                 break;
             }
+            case 4: {
+                int clientNum;
+
+                printf("\nClients Search...\n");
+                printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
+                scanf("%i",&clientNum);
+
+                if (clientNum >= 0 && clientNum < num_clt) {
+                    printf("Client %d:\n", clientNum);
+                    process(&n_o[clientNum]);
+
+
+                }
+                else if (clientNum != -1) {
+                    printf("Invalid Client Number. \n");
+                }
+
+                break;
+            }
+            case 5: { 
+                
+                break;
+            }
+            default: 
+                printf("Invalid option, try again...");
+                break;
         }
-    } while (op != 4);
+    } while (op != 6);
 
     return 0;
 }
@@ -289,16 +336,58 @@ int Prices() {
         printf("Price: %.2f\n", articles[j].price);
     }
 
+    return 0;
+}
+
+int shop() {
+    
+    FILE *file = fopen("example.txt", "r");
+    if (file == NULL) {
+        printf("Error opening file");
+        return 1;
+    }
+
+    Article articles[50];
+    int i = 0;
+
+    while (!feof(file)) {
+        fscanf(file, "%d %s %d %f", &articles[i].id, articles[i].name, &articles[i].num_part, &articles[i].price);
+        i++;
+    }
+
+    fclose(file);
+
+    printf("Read %d articles:\n", i);
+
+    for (int j = 0; j < i; j++) {
+        printf("Article %d:\n", j+1);
+        printf("ID: %d  ", articles[j].id);
+        printf("Name: %s  ", articles[j].name);
+        printf("Parts: %d  ", articles[j].num_part);
+        printf("Price: %.2f\n", articles[j].price);
+    }
+
     int article_id;
-    printf("Enter article ID to search: ");
+    printf("For which one you want to buy some parts: ");    
     scanf("%d", &article_id);
 
     for (int j = 0; j < i; j++) {
         if (articles[j].id == article_id) {
             printf("Article %d:\n", j+1);
-            printf("ID: %d\n", articles[j].id);
-            printf("Name: %s\n", articles[j].name);
+            printf("ID: %d  ", articles[j].id);
+            printf("Name: %s  ", articles[j].name);
+            printf("Parts: %d  ", articles[j].num_part);
             printf("Price: %.2f\n", articles[j].price);
+            
+            int new_quantity;
+            printf("Enter new quantity for article %d (%s): ", article_id, articles[j].name);
+            scanf("%d", &new_quantity);
+
+            articles[j].num_part += new_quantity;
+            float cost = articles[j].price * new_quantity;
+
+            printf("New quantity for article %d (%s): %d Cost: %2f\n", article_id, articles[j].name, articles[j].num_part, cost);
+
             break;
         }
         if (j == i-1) {
@@ -326,13 +415,13 @@ int main() {
         //Secciones del menu principal...
         main_menu:
         system("cls");
-        printf("\nBienvenido el Menu...");
-        printf("\n\n1. Administracion.");
-        printf("\n2. Almacen y Compras.");
-        printf("\n3. Salir del Programa.");
+        printf("\nWelcome to Menu...");
+        printf("\n\n1. Administration.");
+        printf("\n2. Store and Shopping.");
+        printf("\n3. Exit Program.");
 
         //Solicitar dato de entradaa submenu...
-        printf("\n\nSeleccione el numero del submenu.. ");
+        printf("\n\nChoose the option you need.. ");
 
         ret = scanf("%d", &op);
         while (getchar() != '\n');
@@ -346,13 +435,11 @@ int main() {
         switch (op) {
         case 1:
             system("cls");
-            printf("\nEstas en Administracion.\n");
+            printf("\nAdministration.\n");
                 do
                 {
-                    printf("\n1. Registro del cliente.");
-                    printf("\n2. Cotizacion de reparacion.");
-                    printf("\n3. Proceso de Trabajo.");
-                    printf("\n4. Volver al menu principal.");
+                    printf("\n1. Regist, Remove Client, Progress and Repair Price.");
+                    printf("\n2. Go back principal menu.");
                     
                     //Solicitar dato de entrada al area requerida...
                     printf("\n\nSeleccione la opcion que necesite: ");
@@ -368,45 +455,35 @@ int main() {
                     switch (op) {
                     case 1:
                         system("cls");
-                        printf("\nEstas en Registro y Baja de Cliente...\n");
+                        printf("\nEstas en Regist, Remove Client, Progress and Repair Price.\n");
 
-                            while (getchar() != '\n');
+                            //while (getchar() != '\n');
                             Registro();
 
-                        break;
-                    case 2:
-                        system("cls");
-                        printf("\nEstas en Cotizacion de Reparacion...\n");
-
-                            fflush(stdin);
                         break; 
-                    case 3:
-                        system("cls");
-                        printf("\nEstas en Proceso de Trabajo...\n");
-                        break;
-                    case 4:
+                    case 2:
                         system("cls");
                         goto main_menu;
                         break;
                     default:
-                        printf("\nNumero no valido, intente nuevamente...\n");
+                        printf("\nInvalid number, try again...\n");
                         break;
                     }
 
-                } while (op != 4);
+                } while (op != 2);
                 
             break;
         case 2:
             system("cls");
-            printf("\nEstas en Almacen y Compras.\n");
+            printf("\nStore and Shopping.\n");
                 do
                 {
-                    printf("\n1. Almacen.");
-                    printf("\n2. Comprar piezas.");
-                    printf("\n3. Volver al menu principal.");
+                    printf("\n1. Store.");
+                    printf("\n2. Part Shopping.");
+                    printf("\n3. Go back to principal menu.");
 
                     //Solicitar dato de entrada al area requerida...
-                    printf("\n\nSelecione la opcion que necesite: ");
+                    printf("\n\nChoose the option you need: ");
 
                     ret = scanf("%d", &op);
                     while (getchar() != '\n');
@@ -420,11 +497,14 @@ int main() {
                     switch (op) {
                     case 1:
                         system("cls");
-                        printf("\nEstas en el Almacen...\n");
+                        printf("\nStore.\n");
+
+                            Prices();
+                            
                         break;
                     case 2:
                         system("cls");
-                        printf("\nEstas en Compra de Piezas...\n");
+                        printf("\nPart Shopping.\n");
                         break;
                     case 3:
                         system("cls");

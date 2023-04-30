@@ -12,6 +12,12 @@ typedef struct{
     char phone[20];
 }Clients;
 
+typedef struct {
+    char wash[10];
+    char larges[10];
+
+}Process;
+
 int registro( Clients newClient, Clients n_o[], int *num_clt) {
     if (*num_clt >= NUM_CLT) {
         printf("\nExceeded Limit...");
@@ -45,7 +51,6 @@ char view(Clients user){
     printf("Year: %s\n\n", user.year);
     printf("License Plates: %s\n\n", user.plt);
     printf("Series Number: %s\n\n", user.nsm);
-
     
     return 0;
 }
@@ -61,11 +66,13 @@ int main() {
 
     do
     {
-        system("cls");
+        //system("cls");
         printf("\n1. Register Client.");
         printf("\n2. Delete Client.");
         printf("\n3. Search Client.");
-        printf("\n4. Exit");
+        printf("\n4. Progress Work.");
+        printf("\n5. Repair Cost.");
+        printf("\n6. Exit.");
         printf("\n\nWhat do you want to do? ");
         
         ret = scanf("%d", &op);
@@ -85,7 +92,7 @@ int main() {
                 printf("Client Phone: ");
                 scanf("%s", newClient.phone);
                 while (getchar() != '\n');
-                printf("Phone: %s\n", newClient.phone);
+                //printf("Phone: %s\n", newClient.phone);
                 printf("Vehicle: ");
                 fgets(newClient.mk, sizeof(newClient.mk), stdin);
                 printf("Year: ");
@@ -129,8 +136,34 @@ int main() {
                 system("pause");
                 break;
             }
+            case 4: {
+                /*int clientNum;
+
+                printf("\nClients Search...\n");
+                printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
+                scanf("%i",&clientNum);
+
+                if (clientNum >= 0 && clientNum < num_clt) {
+                    printf("Client %d:\n", clientNum);
+                    process(&n_o[clientNum]);
+
+
+                }
+                else if (clientNum != -1) {
+                    printf("Invalid Client Number. \n");
+                }
+
+                break;*/
+            }
+            /*case 5: { 
+                
+                break;
+            }*/
+            default: 
+                printf("Invalid option, try again...");
+                break;
         }
-    } while (op != 4);
+    } while (op != 6);
 
     return 0;
 }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct{
     int id;
@@ -7,14 +8,7 @@ typedef struct{
     float price;
 }Article;
 
-void cost(Article data) {
-
-    printf("Cotizacion de rectificacion\n");
-    
-
-}
-
-int main(int argc, char *argv[]) {
+int main() {
     
     FILE *file = fopen("example.txt", "r");
     if (file == NULL) {
@@ -36,23 +30,33 @@ int main(int argc, char *argv[]) {
 
     for (int j = 0; j < i; j++) {
         printf("Article %d:\n", j+1);
-        printf("ID: %d\n", articles[j].id);
-        printf("Name: %s\n", articles[j].name);
-        printf("Name: %d\n", articles[j].num_part);
+        printf("ID: %d  ", articles[j].id);
+        printf("Name: %s  ", articles[j].name);
+        printf("Parts: %d  ", articles[j].num_part);
         printf("Price: %.2f\n", articles[j].price);
     }
 
     int article_id;
-    printf("Enter article ID to search: ");
+    printf("For which one you want to buy some parts: ");    
     scanf("%d", &article_id);
 
     for (int j = 0; j < i; j++) {
         if (articles[j].id == article_id) {
             printf("Article %d:\n", j+1);
-            printf("ID: %d\n", articles[j].id);
-            printf("Name: %s\n", articles[j].name);
-            printf("Name: %d\n", articles[j].num_part);
+            printf("ID: %d  ", articles[j].id);
+            printf("Name: %s  ", articles[j].name);
+            printf("Parts: %d  ", articles[j].num_part);
             printf("Price: %.2f\n", articles[j].price);
+            
+            int new_quantity;
+            printf("Enter new quantity for article %d (%s): ", article_id, articles[j].name);
+            scanf("%d", &new_quantity);
+
+            articles[j].num_part += new_quantity;
+            float cost = articles[j].price * new_quantity;
+
+            printf("New quantity for article %d (%s): %d Cost: %2f\n", article_id, articles[j].name, articles[j].num_part, cost);
+
             break;
         }
         if (j == i-1) {
