@@ -29,11 +29,13 @@ int main() {
 
     int o;
 
-    printf("Read %d articles:\n", i);
+    do {
+        printf("Read %d articles:\n", i);
 
-    for (int j = 0; j < i; j++) {
-        printf("Article %d:\n", j+1);
-        printf("ID: %d Name: %s Parts: %d Price: %.2f\n", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
+        for (int j = 0; j < i; j++) {
+            printf("Article %d:\n", j+1);
+            printf("ID: %d Name: %s Parts: %d Price: %.2f\n", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
+        }
 
         int article_id;
         printf("Enter article ID to search: ");
@@ -70,16 +72,16 @@ int main() {
                 ret = scanf("%d", &o);
                 while (getchar() != '\n');
                 if (ret != 1) {
-                printf("Invalid option, please put a number... ");
-                fgets(buffer, sizeof(buffer), stdin);
-                //continue;
+                    printf("Invalid option, please put a number... ");
+                    fgets(buffer, sizeof(buffer), stdin);
+                    //continue;
                 }
             }
             if (j == i-1) {
                 printf("Article not found\n");
             }
         }
-    }
+    } while (o != 2);
 
     return 0;
 }
