@@ -1,2 +1,0 @@
-023 Rec_Pistones 0 1,800.00
-024 Pistones_Nissan 12 600.00

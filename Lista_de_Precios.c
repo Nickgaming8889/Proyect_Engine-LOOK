@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
         printf("Article %d:\n", j+1);
         printf("ID: %d\n", articles[j].id);
         printf("Name: %s\n", articles[j].name);
-        printf("Name: %d\n", articles[j].num_part);
+        printf("Parts: %d\n", articles[j].num_part);
         printf("Price: %.2f\n", articles[j].price);
     }
 
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
             printf("Article %d:\n", j+1);
             printf("ID: %d\n", articles[j].id);
             printf("Name: %s\n", articles[j].name);
-            printf("Name: %d\n", articles[j].num_part);
+            printf("Parts: %d\n", articles[j].num_part);
             printf("Price: %.2f\n", articles[j].price);
             break;
         }

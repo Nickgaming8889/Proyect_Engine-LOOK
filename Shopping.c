@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 typedef struct{
     int id;
@@ -9,6 +8,8 @@ typedef struct{
 }Article;
 
 int main() {
+    int ret;
+    char buffer[100];
     
     FILE *file = fopen("example.txt", "r");
     if (file == NULL) {
@@ -26,41 +27,57 @@ int main() {
 
     fclose(file);
 
+    int o;
+
     printf("Read %d articles:\n", i);
 
     for (int j = 0; j < i; j++) {
         printf("Article %d:\n", j+1);
-        printf("ID: %d  ", articles[j].id);
-        printf("Name: %s  ", articles[j].name);
-        printf("Parts: %d  ", articles[j].num_part);
-        printf("Price: %.2f\n", articles[j].price);
-    }
+        printf("ID: %d Name: %s Parts: %d Price: %.2f\n", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
 
-    int article_id;
-    printf("For which one you want to buy some parts: ");    
-    scanf("%d", &article_id);
-
-    for (int j = 0; j < i; j++) {
-        if (articles[j].id == article_id) {
-            printf("Article %d:\n", j+1);
-            printf("ID: %d  ", articles[j].id);
-            printf("Name: %s  ", articles[j].name);
-            printf("Parts: %d  ", articles[j].num_part);
-            printf("Price: %.2f\n", articles[j].price);
-            
-            int new_quantity;
-            printf("Enter new quantity for article %d (%s): ", article_id, articles[j].name);
-            scanf("%d", &new_quantity);
-
-            articles[j].num_part += new_quantity;
-            float cost = articles[j].price * new_quantity;
-
-            printf("New quantity for article %d (%s): %d Cost: %2f\n", article_id, articles[j].name, articles[j].num_part, cost);
-
-            break;
+        int article_id;
+        printf("Enter article ID to search: ");
+        ret = scanf("%d", &article_id);
+        while (getchar() != '\n');
+        if (ret != 1) {
+            printf("Invalid option, please put a number... ");
+            fgets(buffer, sizeof(buffer), stdin);
+            //continue;
         }
-        if (j == i-1) {
-            printf("Article not found\n");
+
+        for (int j = 0; j < i; j++) {
+            if (articles[j].id == article_id) {
+                printf("Article %d:\n", j+1);
+                printf("ID: %d Name: %s Parts: %d Price: %.2f\n", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
+
+                int new_quantity;
+                printf("Enter new quantity for article %d (%s): ", article_id, articles[j].name);
+          
+                ret = scanf("%d", &new_quantity);
+                while (getchar() != '\n');
+                if (ret != 1) {
+                    printf("Invalid option, please put a number... ");
+                    fgets(buffer, sizeof(buffer), stdin);
+                    //continue;
+                }
+
+                articles[j].num_part += new_quantity;
+                float cost = new_quantity * articles[j].price;
+
+                printf("New quatity for article %d (%s): %d Cost: %2f", article_id, articles[j].name, articles[j].num_part, cost);
+
+                printf("\n\nDo you want to continue buying articles? y(1)/n(2) ");
+                ret = scanf("%d", &o);
+                while (getchar() != '\n');
+                if (ret != 1) {
+                printf("Invalid option, please put a number... ");
+                fgets(buffer, sizeof(buffer), stdin);
+                //continue;
+                }
+            }
+            if (j == i-1) {
+                printf("Article not found\n");
+            }
         }
     }
 
