@@ -3,6 +3,11 @@
 
 #define NUM_CLT 100
 
+typedef struct {
+    char wash[10];
+    char larges[10];
+}Process;
+
 typedef struct{
     char name_clt[80];
     char mk[50];
@@ -10,13 +15,8 @@ typedef struct{
     char plt[10];
     char year[20];
     char phone[20];
+    Process works;
 }Clients;
-
-typedef struct {
-    char wash[10];
-    char larges[10];
-
-}Process;
 
 int registro( Clients newClient, Clients n_o[], int *num_clt) {
     if (*num_clt >= NUM_CLT) {
@@ -55,6 +55,71 @@ char view(Clients user){
     return 0;
 }
 
+char saveprogress(Clients *user);
+
+char process(Clients *user) {
+    int ret, o;
+    char buffer[100];
+
+    FILE *ft = fopen ("progress.txt", "r");
+    if (ft == NULL) {
+        char line[100];
+        while (fgets(line, sizeof(line), ft)) {
+            char *name = strtok(line, ",");
+            if (strcmp(name, user->name_clt) == 0) {
+                char *wash = strtok(NULL, ",");
+                char *larges = strtok(NULL, ",");
+                strcpy(user->works.wash, wash);
+                strcpy(user->works.larges, larges);
+                break;
+            }
+        }
+        fclose(ft);
+    }
+
+    printf("The engine is already clean? Y[1]/N[2] ");
+    scanf("%s", user->works.wash);
+
+    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    ret = scanf("%d", &o);
+    while (getchar() != '\n');
+    if (ret != 1) {
+        printf("Invalid option, please put a number... ");
+        fgets(buffer, sizeof(buffer), stdin);
+    }
+    if (o == 2) {
+        saveprogress(user);
+        return 0;
+    }
+
+    printf("Larges are already taked? Y[1]/N[2] ");
+    scanf("%s", user->works.larges);
+
+    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    ret = scanf("%d", &o);
+    while (getchar() != '\n');
+    if (ret != 1) {
+        printf("Invalid option, please put a number... ");
+        fgets(buffer, sizeof(buffer), stdin);
+    }
+    if (o == 2) {
+        saveprogress(user);
+        return 0;
+    }
+
+    return 0;
+}
+
+char saveprogress(Clients *user) {
+    FILE *ft = fopen ("progress.txt", "a");
+    if (ft != NULL) {
+        printf (ft, "%s %s %s\n", user->name_clt, user->works.wash, user->works.larges);
+        fclose(ft);
+    }
+
+    return 0;
+}
+
 int main() {
     Clients n_o[NUM_CLT];
     int ret;
@@ -72,7 +137,7 @@ int main() {
         printf("\n3. Search Client.");
         printf("\n4. Progress Work.");
         printf("\n5. Repair Cost.");
-        printf("\n6. Exit.");
+        printf("\n6. Get back to principal menu.");
         printf("\n\nWhat do you want to do? ");
         
         ret = scanf("%d", &op);
@@ -137,7 +202,7 @@ int main() {
                 break;
             }
             case 4: {
-                /*int clientNum;
+                int clientNum;
 
                 printf("\nClients Search...\n");
                 printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
@@ -153,15 +218,12 @@ int main() {
                     printf("Invalid Client Number. \n");
                 }
 
-                break;*/
+                break;
             }
             /*case 5: { 
                 
                 break;
             }*/
-            default: 
-                printf("Invalid option, try again...");
-                break;
         }
     } while (op != 6);
 

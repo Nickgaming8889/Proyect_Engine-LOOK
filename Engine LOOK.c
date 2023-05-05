@@ -185,12 +185,22 @@ int Cost() {
 
 //Función Progreso...
 char process(Clients *user) {
+    int ret, o;
+    char buffer[100];
 
-    printf("\nThe engine is already clean? Y(1)/N(2) ");
+    printf("The engine is already clean? Y(1)/N(2)");
     scanf("%s", user->works.wash);
-    printf("Larges are already taked? Y(1)/N(2) ");
-    scanf("%s", user->works.larges);
 
+    printf("\n\nDo you want to continue? y(1)/n(2) ");
+    ret = scanf("%d", &o);
+    while (getchar() != '\n');
+    if (ret != 1) {
+        printf("Invalid option, please put a number... ");
+        fgets(buffer, sizeof(buffer), stdin);
+        //continue;
+    }
+    printf("Larges are already taked? Y(1)/N(2)");
+    scanf("%s", user->works.larges);
     return 0;
 }
 
