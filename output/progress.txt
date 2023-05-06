@@ -1,7 +1,2 @@
 qwert
- 1 
-qwert
- 1 1qwerty
- 1 
-qwer
- 1 
+,1,
