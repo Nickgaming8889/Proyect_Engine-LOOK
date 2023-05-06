@@ -3,6 +3,10 @@
 typedef struct {
     float stdpiston;
     float limitstd;
+    float piston_1;
+    float piston_2;
+    float piston_3;
+    float piston_4;
 }RorN;
 
 typedef struct{

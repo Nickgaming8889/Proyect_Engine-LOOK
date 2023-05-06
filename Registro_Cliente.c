@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define NUM_CLT 100
 
 typedef struct {
     char wash[10];
     char larges[10];
+    char rect[10];
+    char deliver[10];
 }Process;
 
 typedef struct{
@@ -69,8 +72,12 @@ char process(Clients *user) {
             if (strcmp(name, user->name_clt) == 0) {
                 char *wash = strtok(NULL, ",");
                 char *larges = strtok(NULL, ",");
+                char *rect = strtok(NULL, ",");
+                char *deliver = strtok(NULL, ",");
                 strcpy(user->works.wash, wash);
                 strcpy(user->works.larges, larges);
+                strcpy(user->works.rect, rect);
+                strcpy(user->works.deliver, deliver);
                 break;
             }
         }
@@ -92,8 +99,38 @@ char process(Clients *user) {
         return 0;
     }
 
-    printf("Larges are already taked? Y[1]/N[2] ");
+    printf("\n\nLarges are already taked? Y[1]/N[2] ");
     scanf("%s", user->works.larges);
+
+    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    ret = scanf("%d", &o);
+    while (getchar() != '\n');
+    if (ret != 1) {
+        printf("Invalid option, please put a number... ");
+        fgets(buffer, sizeof(buffer), stdin);
+    }
+    if (o == 2) {
+        saveprogress(user);
+        return 0;
+    }
+
+    printf("\n\nRectification is already did it? Y[1]/N[2] ");
+    scanf("%s", user->works.rect);
+
+    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    ret = scanf("%d", &o);
+    while (getchar() != '\n');
+    if (ret != 1) {
+        printf("Invalid option, please put a number... ");
+        fgets(buffer, sizeof(buffer), stdin);
+    }
+    if (o == 2) {
+        saveprogress(user);
+        return 0;
+    }
+
+    printf("\n\nReady to deliver? Y[1]/N[2] ");
+    scanf("%s", user->works.deliver);
 
     printf("\n\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
@@ -113,10 +150,9 @@ char process(Clients *user) {
 char saveprogress(Clients *user) {
     FILE *ft = fopen ("progress.txt", "a");
     if (ft != NULL) {
-        printf (ft, "%s %s %s\n", user->name_clt, user->works.wash, user->works.larges);
+        fprintf (ft, "Client: %s Ready_Washed Y[1]/N[2]: %s Ready_TakeLarges Y[1]/N[2]: %s Recti: %s Deliver: %s\n", user->name_clt, user->works.wash, user->works.larges, user->works.rect, user->works.deliver);
         fclose(ft);
     }
-
     return 0;
 }
 
