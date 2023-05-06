@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define NUM_CLT 100
 
@@ -45,7 +46,7 @@ char view(Clients user){
 char saveprogress(Clients *user);
 
 char process(Clients *user) {
-    char ret, o;
+    int ret, o;
     char buffer[100];
 
     FILE *ft = fopen ("progress.txt", "r");
@@ -70,11 +71,11 @@ char process(Clients *user) {
     printf("\n\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
-    if (ret != '1') {
+    if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
     }
-    if (o == '2') {
+    if (o == 2) {
         saveprogress(user);
         return 0;
     }
@@ -85,11 +86,11 @@ char process(Clients *user) {
     printf("\n\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
-    if (ret != '1') {
+    if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
     }
-    if (o == '2') {
+    if (o == 2) {
         saveprogress(user);
         return 0;
     }
@@ -100,7 +101,7 @@ char process(Clients *user) {
 char saveprogress(Clients *user) {
     FILE *ft = fopen ("progress.txt", "a");
     if (ft != NULL) {
-        printf (ft, "%s %s %s\n", user->name_clt, user->works.wash, user->works.larges);
+        fprintf (ft, "%s %s %s\n", user->name_clt, user->works.wash, user->works.larges);
         fclose(ft);
     }
 
