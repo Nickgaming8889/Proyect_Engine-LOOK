@@ -4,3 +4,15 @@ Client: tttt
  Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Recti:  Deliver: 
 Client: tttt
  Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Recti:  Deliver: 
+Client: Nicolas Caceres
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Recti:  Deliver: 
+Client: Nicolas Caceres
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Recti:  Deliver: 
+Client: tttt
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]:  Recti:  Deliver: 
+Client: tttt
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Recti:  Deliver: 
+Client: tttt
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Recti: 1 Deliver: 
+Client: tttt
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Recti: 1 Deliver: 1

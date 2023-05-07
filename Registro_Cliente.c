@@ -105,7 +105,7 @@ float rect_price(Clients *price) {
     return 0;
 }
 
-int recty(Clients *engine) {
+float recty(Clients *engine) {
     int ret, num_piston;
     char buffer[100];
 
@@ -139,18 +139,19 @@ int recty(Clients *engine) {
 
             if (mmax >= engine->var.stdpiston_nissan && mmax <= engine->var.limitstd_nissan) {
                 printf("By the moment it don need to be rectify");
+                return 0;
             }
-            if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
+            else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
                 printf("Rectification to 0.10mm.");
+                return 0;
             }
-            if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
+            else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
                 printf("Rectification to 0.20mm.");
+                return 0;
             }
-            if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
+            else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
                 printf("Rectification to 0.30mm.");
-            }
-            else {
-                printf("It's better change pieces and recover monoblock glass...");
+                return 0;
             }
 
             break;
@@ -180,20 +181,21 @@ int recty(Clients *engine) {
 
             printf("%f", mmax);
 
-            if (mmax >= engine->var.stdpiston_nissan && mmax <= engine->var.limitstd_nissan) {
+            if (mmax > engine->var.stdpiston_nissan && mmax < engine->var.limitstd_nissan) {
                 printf("By the moment it don need to be rectify");
+                return 0;
             }
-            if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
+            else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
                 printf("Rectification to 0.10mm.");
+                return 0;
             }
-            if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
+            else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
                 printf("Rectification to 0.20mm.");
+                return 0;
             }
-            if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
+            else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
                 printf("Rectification to 0.30mm.");
-            }
-            else {
-                printf("It's better change pieces and recover monoblock glass...");
+                return 0;
             }
             break;
         }
@@ -224,24 +226,25 @@ int recty(Clients *engine) {
 
             float max1 = fmax(engine->var.piston_1T, fmax(engine->var.piston_2T, fmax(engine->var.piston_3T, fmax(engine->var.piston_4T, fmax(engine->var.piston_5T, fmax(engine->var.piston_6T, fmax(engine->var.piston_7T, engine->var.piston_8T)))))));
             float max2 = fmax(engine->var.piston_1L, fmax(engine->var.piston_2L, fmax(engine->var.piston_3L, fmax(engine->var.piston_4L, fmax(engine->var.piston_5L, fmax(engine->var.piston_6L, fmax(engine->var.piston_7L, engine->var.piston_8L)))))));
-            float mmax = fmax(max1, max2);
+            double mmax = fmax(max1, max2);
 
             printf("%f", mmax);
 
             if (mmax >= engine->var.stdpiston_nissan && mmax <= engine->var.limitstd_nissan) {
                 printf("By the moment it don need to be rectify");
+                return 0;
             }
-            if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
+            else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
                 printf("Rectification to 0.10mm.");
+                return 0;
             }
-            if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
+            else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
                 printf("Rectification to 0.20mm.");
+                return 0;
             }
-            if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
+            else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
                 printf("Rectification to 0.30mm.");
-            }
-            else {
-                printf("It's better change pieces and recover monoblock glass...");
+                return 0;
             }
             break;
         }
@@ -277,59 +280,71 @@ char process(Clients *user) {
     printf("The engine is already clean? Y[1]/N[2] ");
     scanf("%s", user->works.wash);
 
-    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    printf("\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
     if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
     }
+    if (o == 1) {
+        saveprogress(user);
+    }
     if (o == 2) {
         saveprogress(user);
         return 0;
     }
 
-    printf("\n\nLarges are already taked? Y[1]/N[2] ");
+    printf("\nLarges are already taked? Y[1]/N[2] ");
     scanf("%s", user->works.larges);
 
     recty(user);
 
-    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    printf("\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
     if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
     }
+    if (o == 1) {
+        saveprogress(user);
+    }
     if (o == 2) {
         saveprogress(user);
         return 0;
     }
 
-    printf("\n\nRectification is already did it? Y[1]/N[2] ");
+    printf("\nRectification is already did it? Y[1]/N[2] ");
     scanf("%s", user->works.rect);
 
-    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    printf("\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
     if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
+    }
+    if (o == 1) {
+        saveprogress(user);
     }
     if (o == 2) {
         saveprogress(user);
         return 0;
     }
 
-    printf("\n\nReady to deliver? Y[1]/N[2] ");
+    printf("\nReady to deliver? Y[1]/N[2] ");
     scanf("%s", user->works.deliver);
 
-    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    printf("\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
     if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
+    }
+    if (o == 1) {
+        saveprogress(user);
     }
     if (o == 2) {
         saveprogress(user);

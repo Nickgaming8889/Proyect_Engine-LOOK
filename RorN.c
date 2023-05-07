@@ -89,7 +89,7 @@ void main() {
 
             printf("%f", mmax);
 
-            if (mmax >= engine->var.stdpiston_nissan && mmax <= engine->var.limitstd_nissan) {
+            if (mmax > engine->var.stdpiston_nissan && mmax < engine->var.limitstd_nissan) {
                 printf("By the moment it don need to be rectify");
             }
             else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
