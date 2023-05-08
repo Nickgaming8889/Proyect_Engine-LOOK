@@ -146,7 +146,7 @@ float recty(Clients *engine) {
 
             printf("%3f\n", mmax);
 
-            if (mmax >= engine->var.stdpiston_nissan && mmax <= engine->var.limitstd_nissan) {
+            if (mmax > engine->var.stdpiston_nissan && mmax < engine->var.limitstd_nissan) {
                 printf("By the moment it don need to be rectify");
                 
             }
@@ -161,6 +161,8 @@ float recty(Clients *engine) {
             else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
                 printf("Rectification to 0.30mm.");
                 
+            }else{
+                 printf("Change pieces...");
             }
 
             break;
@@ -242,15 +244,15 @@ float recty(Clients *engine) {
                 printf("By the moment it don need to be rectify");
                 
             }
-            else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
+            if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
                 printf("Rectification to 0.10mm.");
                 
             }
-            else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
+            if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
                 printf("Rectification to 0.20mm.");
                 
             }
-            else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
+            if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
                 printf("Rectification to 0.30mm.");
                 
             }
