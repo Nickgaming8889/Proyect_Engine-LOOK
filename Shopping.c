@@ -11,7 +11,7 @@ int main() {
     int ret;
     char buffer[100];
     
-    FILE *file = fopen("example.txt", "r");
+    FILE *file = fopen("example.txt", "r+");
     if (file == NULL) {
         printf("Error opening file");
         return 1;
@@ -66,7 +66,12 @@ int main() {
                 articles[j].num_part += new_quantity;
                 float cost = new_quantity * articles[j].price;
 
+                fseek(file, ftell(file)-sizeof(Article), SEEK_SET);
+                fprintf(file, "%d %s %d %.2f", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
+
+
                 printf("New quatity for article %d (%s): %d Cost: %2f", article_id, articles[j].name, articles[j].num_part, cost);
+
 
                 printf("\n\nDo you want to continue buying articles? y(1)/n(2) ");
                 ret = scanf("%d", &o);
@@ -74,11 +79,13 @@ int main() {
                 if (ret != 1) {
                     printf("Invalid option, please put a number... ");
                     fgets(buffer, sizeof(buffer), stdin);
-                    //continue;
+                    continue;
                 }
+
+                break;
             }
-            if (j == i-1) {
-                printf("Article not found\n");
+            else if (j == i-1) {
+                printf("\nArticle not found\n");
             }
         }
     } while (o != 2);

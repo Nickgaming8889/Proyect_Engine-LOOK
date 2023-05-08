@@ -1,0 +1,8 @@
+	ID Reparacion: 1  Name: Rectify
+
+Client Name: ttt
+
+Horas trabajadas: 86
+Subtotal: 16605.95
+IVA: 2864.53
+Total: 19096.84

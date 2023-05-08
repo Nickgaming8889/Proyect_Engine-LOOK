@@ -4,6 +4,7 @@
 #include <math.h>
 
 #define NUM_CLT 100
+#define IVA 0.15
 
 typedef struct {
     float stdpiston_nissan;
@@ -51,6 +52,14 @@ typedef struct{
     Rect price;
     Process works;
 }Clients;
+
+typedef struct {
+    int id;
+    char repair[50];
+    float cost_repair;
+    int time;
+    float p_Hrs;
+}Repairs;
 
 int registro( Clients newClient, Clients n_o[], int *num_clt) {
     if (*num_clt >= NUM_CLT) {
@@ -139,19 +148,19 @@ float recty(Clients *engine) {
 
             if (mmax >= engine->var.stdpiston_nissan && mmax <= engine->var.limitstd_nissan) {
                 printf("By the moment it don need to be rectify");
-                return 0;
+                
             }
             else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
                 printf("Rectification to 0.10mm.");
-                return 0;
+                
             }
             else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
                 printf("Rectification to 0.20mm.");
-                return 0;
+                
             }
             else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
                 printf("Rectification to 0.30mm.");
-                return 0;
+                
             }
 
             break;
@@ -183,19 +192,18 @@ float recty(Clients *engine) {
 
             if (mmax > engine->var.stdpiston_nissan && mmax < engine->var.limitstd_nissan) {
                 printf("By the moment it don need to be rectify");
-                return 0;
+                
             }
-            else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
+            if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
                 printf("Rectification to 0.10mm.");
-                return 0;
+                
             }
-            else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
+            if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
                 printf("Rectification to 0.20mm.");
-                return 0;
+                
             }
-            else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
+            if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
                 printf("Rectification to 0.30mm.");
-                return 0;
             }
             break;
         }
@@ -226,25 +234,25 @@ float recty(Clients *engine) {
 
             float max1 = fmax(engine->var.piston_1T, fmax(engine->var.piston_2T, fmax(engine->var.piston_3T, fmax(engine->var.piston_4T, fmax(engine->var.piston_5T, fmax(engine->var.piston_6T, fmax(engine->var.piston_7T, engine->var.piston_8T)))))));
             float max2 = fmax(engine->var.piston_1L, fmax(engine->var.piston_2L, fmax(engine->var.piston_3L, fmax(engine->var.piston_4L, fmax(engine->var.piston_5L, fmax(engine->var.piston_6L, fmax(engine->var.piston_7L, engine->var.piston_8L)))))));
-            double mmax = fmax(max1, max2);
+            float mmax = fmax(max1, max2);
 
             printf("%f", mmax);
 
             if (mmax >= engine->var.stdpiston_nissan && mmax <= engine->var.limitstd_nissan) {
                 printf("By the moment it don need to be rectify");
-                return 0;
+                
             }
             else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
                 printf("Rectification to 0.10mm.");
-                return 0;
+                
             }
             else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
                 printf("Rectification to 0.20mm.");
-                return 0;
+                
             }
             else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
                 printf("Rectification to 0.30mm.");
-                return 0;
+                
             }
             break;
         }
@@ -363,6 +371,61 @@ char saveprogress(Clients *user) {
     return 0;
 }
 
+int cost(Clients user) {
+
+    FILE *file = fopen("example2.txt", "r");
+    if (file == NULL) {
+        printf("Error opening file");
+        return 1;
+    }
+
+    Repairs repairs[50];
+    int i = 0;
+
+    while (!feof(file)) {
+        fscanf(file, "%d %s %f %d %f", &repairs[i].id, repairs[i].repair, &repairs[i].cost_repair, &repairs[i].time, &repairs[i].p_Hrs);
+        i++;
+    }
+
+    FILE *ticket = fopen("Ticker_Cotizacion.txt", "w");
+
+    if (ticket == NULL) {
+        printf("Error opening file.");
+        return 1;
+    }
+
+    int id;
+    printf("Ingrese el ID de la reparacion: ");
+    scanf("%d", &id);
+
+    float total = 0;
+    int hrs;
+    printf("Ingrese el tiempo en horas trabajadas: ");
+    scanf("%d", &hrs);
+    total += hrs * 172.87 * (1 + IVA);
+
+    for (int j = 0; j < i; j++) {
+        if (repairs[j].id == id) {
+            total += repairs[j].cost_repair;
+            repairs[j].time = hrs;
+            repairs[j].p_Hrs = 172.87 * (1 + IVA);
+            fprintf(ticket, "\tID Reparacion: %d  Name: %s\n\n", id, repairs[j].repair);
+            break;
+        }
+    }
+
+    fprintf(ticket, "Client Name: %s\n", user.name_clt);
+    fprintf(ticket, "Horas trabajadas: %d\n", hrs);
+    fprintf(ticket, "Subtotal: %.2f\n", total / 1.15);
+    fprintf(ticket, "IVA: %.2f\n", total * 0.15);
+    fprintf(ticket, "Total: %.2f\n", total);
+
+    fclose(file);
+    fclose(ticket);
+
+    return 0;
+}
+
 int main() {
     Clients n_o[NUM_CLT];
     int ret;
@@ -463,10 +526,26 @@ int main() {
 
                 break;
             }
-            /*case 5: { 
-                
+            case 5: { 
+                printf("Repair Cost: ");
+                int clientNum;
+
+                printf("\nClients Search...\n");
+                printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
+                scanf("%i",&clientNum);
+
+                if (clientNum >= 0 && clientNum < num_clt) {
+                    printf("Client %d:\n", clientNum);
+                    cost(n_o[clientNum]);
+
+
+                }
+                else if (clientNum != -1) {
+                    printf("Invalid Client Number. \n");
+                }
+
                 break;
-            }*/
+            }
         }
     } while (op != 6);
 
