@@ -25,10 +25,6 @@ typedef struct {
     float piston_8L;
 }RorN;
 
-typedef struct {
-    float recti_price;
-}Rect;
-
 typedef struct{
     char name_clt[80];
     char mk[50];
@@ -37,7 +33,6 @@ typedef struct{
     char year[20];
     char phone[20];
     RorN var;
-    Rect price;
 }Clients;
 
 float variables(Clients *engine) {
@@ -49,17 +44,9 @@ float variables(Clients *engine) {
     return 0;
 }
 
-float rect_price(Clients *price) {
-    price->price.recti_price = 2000.00;
-
-    return 0;
-}
-
-void main() {
+int main(Clients *engine) {
     int ret, num_piston;
     char buffer[100];
-
-    Clients *engine;
 
     printf("Choose how much pistons have the engine (4 to 8): ");
     ret = scanf("%d", &num_piston);
@@ -71,6 +58,7 @@ void main() {
 
     switch (num_piston) {
         case 4: {
+
             printf("\nPiston 1 Measurements Transverse and Long: ");
             scanf("%f %f", &engine->var.piston_1T, &engine->var.piston_1L);
 
@@ -93,13 +81,13 @@ void main() {
                 printf("By the moment it don need to be rectify");
             }
             else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
-                printf("Rectification to 0.10mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.10mm.");
             }
             else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
-                printf("Rectification to 0.20mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.20mm.");
             }
             else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
-                printf("Rectification to 0.30mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.30mm.");
             }
             else {
                 printf("It's better change pieces and recover monoblock glass...");
@@ -136,13 +124,13 @@ void main() {
                 printf("By the moment it don need to be rectify");
             }
             else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
-                printf("Rectification to 0.10mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.10mm.");
             }
             else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
-                printf("Rectification to 0.20mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.20mm.");
             }
             else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
-                printf("Rectification to 0.30mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.30mm.");
             }
             else {
                 printf("It's better change pieces and recover monoblock glass...");
@@ -184,13 +172,13 @@ void main() {
                 printf("By the moment it don need to be rectify");
             }
             else if (mmax > engine->var.limitstd_nissan && mmax < engine->var.toten) {
-                printf("Rectification to 0.10mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.10mm.");
             }
             else if (mmax > engine->var.toten && mmax < engine->var.totwenty) {
-                printf("Rectification to 0.20mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.20mm.");
             }
             else if (mmax > engine->var.totwenty && mmax < engine->var.tothirty) {
-                printf("Rectification to 0.30mm. Cost: %f", engine->price.recti_price);
+                printf("Rectification to 0.30mm.");
             }
             else {
                 printf("It's better change pieces and recover monoblock glass...");
@@ -198,6 +186,5 @@ void main() {
             break;
         }
     }
-
     return 0;
 }
