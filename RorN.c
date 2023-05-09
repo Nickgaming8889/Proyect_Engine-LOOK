@@ -44,7 +44,9 @@ float variables(Clients *engine) {
     return 0;
 }
 
-int main(Clients *engine) {
+Clients engine;
+
+int main(int argc, char*argv[]) {
     int ret, num_piston;
     char buffer[100];
 
@@ -60,7 +62,7 @@ int main(Clients *engine) {
         case 4: {
 
             printf("\nPiston 1 Measurements Transverse and Long: ");
-            scanf("%f %f", &engine->var.piston_1T, &engine->var.piston_1L);
+            scanf("%f %f", &engine->var.piston_1T, &engine[0].var.piston_1L);
 
             printf("\nPiston 2 Measurements Transverse and Long: ");
             scanf("%f %f", &engine->var.piston_2T, &engine->var.piston_2L);
