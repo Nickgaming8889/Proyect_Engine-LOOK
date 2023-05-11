@@ -32,15 +32,19 @@ typedef struct{
     char plt[10];
     char year[20];
     char phone[20];
-    RorN var;
 }Clients;
 
-float variables(Clients *engine) {
-    engine->var.stdpiston_nissan = 80.465;
-    engine->var.limitstd_nissan = 80.515;
-    engine->var.toten = 80.565;
-    engine->var.totwenty = 80.665;
-    engine->var.tothirty = 80.765;
+RorN var;
+
+float variables() {
+
+    var.stdpiston_nissan = 80.465;
+    var.limitstd_nissan = 80.515;
+    var.toten = 80.565;
+    var.totwenty = 80.665;
+    var.tothirty = 80.765;
+
+    printf("%.3f", var.limitstd_nissan);
     return 0;
 }
 
@@ -49,6 +53,10 @@ Clients engine;
 int main(int argc, char*argv[]) {
     int ret, num_piston;
     char buffer[100];
+
+    variables();
+
+    printf("%.3f", var.limitstd_nissan);
 
     printf("Choose how much pistons have the engine (4 to 8): ");
     ret = scanf("%d", &num_piston);
@@ -80,21 +88,20 @@ int main(int argc, char*argv[]) {
             printf("%f", mmax);
 
             if (mmax >= engine.var.stdpiston_nissan || mmax <= engine.var.limitstd_nissan) {
-                printf("By the moment it don need to be rectify");
+            printf("By the moment it doesn't need to be rectified.");
             }
-            else if (mmax >= engine.var.limitstd_nissan || mmax <= engine.var.toten) {
+            else if (mmax >= engine.var.limitstd_nissan && mmax <= engine.var.toten) {
                 printf("Rectification to 0.10mm.");
             }
-            else if (mmax > engine.var.toten || mmax < engine.var.totwenty) {
+            else if (mmax > engine.var.toten && mmax <= engine.var.totwenty) {
                 printf("Rectification to 0.20mm.");
             }
-            else if (mmax > engine.var.totwenty || mmax < engine.var.tothirty) {
+            else if (mmax > engine.var.totwenty && mmax <= engine.var.tothirty) {
                 printf("Rectification to 0.30mm.");
             }
             else {
-                printf("It's better change pieces and recover monoblock glass...");
+                printf("It's better to change pieces and recover monoblock glass...");
             }
-
             break;
         }
         case 6: {
@@ -122,20 +129,20 @@ int main(int argc, char*argv[]) {
 
             printf("%f", mmax);
 
-            if (mmax > engine.var.stdpiston_nissan && mmax < engine.var.limitstd_nissan) {
-                printf("By the moment it don need to be rectify");
+            if (mmax >= engine.var.stdpiston_nissan || mmax <= engine.var.limitstd_nissan) {
+            printf("By the moment it doesn't need to be rectified.");
             }
-            else if (mmax > engine.var.limitstd_nissan && mmax < engine.var.toten) {
+            else if (mmax >= engine.var.limitstd_nissan && mmax <= engine.var.toten) {
                 printf("Rectification to 0.10mm.");
             }
-            else if (mmax > engine.var.toten && mmax < engine.var.totwenty) {
+            else if (mmax > engine.var.toten && mmax <= engine.var.totwenty) {
                 printf("Rectification to 0.20mm.");
             }
-            else if (mmax > engine.var.totwenty && mmax < engine.var.tothirty) {
+            else if (mmax > engine.var.totwenty && mmax <= engine.var.tothirty) {
                 printf("Rectification to 0.30mm.");
             }
             else {
-                printf("It's better change pieces and recover monoblock glass...");
+                printf("It's better to change pieces and recover monoblock glass...");
             }
             break;
         }
@@ -170,20 +177,20 @@ int main(int argc, char*argv[]) {
 
             printf("%f", mmax);
 
-            if (mmax > engine.var.stdpiston_nissan && mmax < engine.var.limitstd_nissan) {
-                printf("By the moment it don need to be rectify");
+            if (mmax >= engine.var.stdpiston_nissan || mmax <= engine.var.limitstd_nissan) {
+            printf("By the moment it doesn't need to be rectified.");
             }
-            else if (mmax > engine.var.limitstd_nissan && mmax < engine.var.toten) {
+            else if (mmax >= engine.var.limitstd_nissan && mmax <= engine.var.toten) {
                 printf("Rectification to 0.10mm.");
             }
-            else if (mmax > engine.var.toten && mmax < engine.var.totwenty) {
+            else if (mmax > engine.var.toten && mmax <= engine.var.totwenty) {
                 printf("Rectification to 0.20mm.");
             }
-            else if (mmax > engine.var.totwenty && mmax < engine.var.tothirty) {
+            else if (mmax > engine.var.totwenty && mmax <= engine.var.tothirty) {
                 printf("Rectification to 0.30mm.");
             }
             else {
-                printf("It's better change pieces and recover monoblock glass...");
+                printf("It's better to change pieces and recover monoblock glass...");
             }
             break;
         }
