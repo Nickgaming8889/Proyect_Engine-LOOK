@@ -1,8 +1,8 @@
 	ID Reparacion: 1  Name: Rectify
 
-Client Name: ttt
+	Client Name: tttt
 
-Horas trabajadas: 86
-Subtotal: 16605.95
-IVA: 2864.53
-Total: 19096.84
+	Horas trabajadas: 96
+	Subtotal: 18334.65
+	IVA: 3162.73
+Total: 21084.85

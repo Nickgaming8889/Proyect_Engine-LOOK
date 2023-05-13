@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <math.h>
 
 #define LONGITUD 6
 #define INTENTOS 3
@@ -16,6 +17,25 @@ typedef struct {
     char deliver[10];
 }Process;
 
+typedef struct {
+    float piston_1T;
+    float piston_1L;
+    float piston_2T;
+    float piston_2L;
+    float piston_3T;
+    float piston_3L;
+    float piston_4T;
+    float piston_4L;
+    float piston_5T;
+    float piston_5L;
+    float piston_6T;
+    float piston_6L;
+    float piston_7T;
+    float piston_7L;
+    float piston_8T;
+    float piston_8L;
+}Piston;
+
 typedef struct{
     char name_clt[80];
     char mk[50];
@@ -24,6 +44,7 @@ typedef struct{
     char year[20];
     char phone[20];
     Process works;
+    Piston eng;
 }Clients;
 
 typedef struct{
@@ -40,6 +61,14 @@ typedef struct {
     int time;
     float p_Hrs;
 }Repairs;
+
+typedef struct {
+    float stdpiston_nissan;
+    float limitstd_nissan;
+    float toten;
+    float totwenty;
+    float tothirty;
+}RorN;
 
 //GOTOXY
 void gotoxy(int x,int y){
@@ -82,6 +111,20 @@ int logo(){
     return 0;
 }
 
+int Timer() {
+    int total = 100;
+    int i;
+
+    for (i = 1; i <= total; i++) {
+        gotoxy(32,8);
+        printf("Progress [%-20s] %d%%\r", "====================", i);
+        fflush(stdout);
+        Sleep(200);
+    }
+
+    return 0;
+}
+
 //Función Load Page...
 int load_page() {
 
@@ -91,7 +134,9 @@ int load_page() {
     gotoxy(43,4);
     printf("Loading Program...");
     gotoxy(31,6);
-    printf("Created by: Nicholas Caceres Version 1.23");
+    printf("Created by: Nicholas Caceres Version 1.23\n\n\t");
+
+    Timer();
 
     return 0;
 }
@@ -165,35 +210,173 @@ int delete(int clientNum, Clients n_o[], int *num_clt) {
 //Funcion para ver los datos del cliente...
 char view(Clients user){
     printf("\n\nClient Name: %s\n", user.name_clt);
-    printf("Phone: %s\n", user.phone);
+    printf("Phone: %s\n\n", user.phone);
     printf("Car: %s\n", user.mk);
-    printf("Year: %s\n", user.year);
-    printf("License Plates: %s\n", user.plt);
-    printf("Series Number: %s\n", user.nsm);
+    printf("Year: %s\n\n", user.year);
+    printf("License Plates: %s\n\n", user.plt);
+    printf("Series Number: %s\n\n", user.nsm);
     
     return 0;
 }
 
-//Función Cotización...
-int Cost() {
+RorN var;
 
-    Clients n_o[NUM_CLT];
+float variables() {
 
-    int clientNum, num_clt = 0;
+    var.stdpiston_nissan = 80.465;
+    var.limitstd_nissan = 80.515;
+    var.toten = 80.565;
+    var.totwenty = 80.665;
+    var.tothirty = 80.765;    
+    return 0;
+}
 
-    printf("\nClients Search...\n");
-    printf("Enter the client number (%d) (EXIT[-1]): ", num_clt-1);
-    scanf("%i",&clientNum);
+Clients engine;
 
-    if (clientNum >= 0 && clientNum < num_clt) {
-        printf("Client %d:\n", clientNum);
-        view(n_o[clientNum]);
+int recti() {
+    int ret, num_piston;
+    char buffer[100];
+
+    variables();
+
+    printf("Choose how much pistons have the engine (4 to 8): ");
+    ret = scanf("%d", &num_piston);
+    while (getchar() != '\n');
+    if (ret != 1) {
+        printf("\nInvalid option, enter a number between 4 to 8: ");
+        fgets(buffer, sizeof(buffer), stdin);
     }
-    else if (clientNum != -1) {
-        printf("Invalid Client Number. \n");
+
+    switch (num_piston) {
+        case 4: {
+
+            printf("\nPiston 1 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_1T, &engine.eng.piston_1L);
+
+            printf("\nPiston 2 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_2T, &engine.eng.piston_2L);
+
+            printf("\nPiston 3 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_3T, &engine.eng.piston_3L);
+
+            printf("\nPiston 4 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_4T, &engine.eng.piston_4L);
+
+            float max1 = fmax(engine.eng.piston_1T, fmax(engine.eng.piston_2T, fmax(engine.eng.piston_3T, engine.eng.piston_4T)));
+            float max2 = fmax(engine.eng.piston_1L, fmax(engine.eng.piston_2L, fmax(engine.eng.piston_3L, engine.eng.piston_4L)));
+            float mmax = fmax(max1, max2);
+
+            printf("%.3f", mmax);
+
+            if (mmax >= var.stdpiston_nissan && mmax <= var.limitstd_nissan) {
+            printf("\nBy the moment it doesn't need to be rectified.");
+            }
+            else if (mmax >= var.limitstd_nissan && mmax <= var.toten) {
+                printf("\nRectification to 0.10mm.");
+            }
+            else if (mmax >= var.toten && mmax <= var.totwenty) {
+                printf("\nRectification to 0.20mm.");
+            }
+            else if (mmax >= var.totwenty && mmax <= var.tothirty) {
+                printf("\nRectification to 0.30mm.");
+            }
+            else {
+                printf("\nIt's better to change pieces and recover monoblock glass...");
+            }
+            break;
+        }
+        case 6: {
+            printf("\nPiston 1 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_1T, &engine.eng.piston_1L);
+
+            printf("\nPiston 2 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_2T, &engine.eng.piston_2L);
+
+            printf("\nPiston 3 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_3T, &engine.eng.piston_3L);
+
+            printf("\nPiston 4 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_4T, &engine.eng.piston_4L);
+
+            printf("\nPiston 5 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_5T, &engine.eng.piston_5L);
+
+            printf("\nPiston 6 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_6T, &engine.eng.piston_6L);
+
+            float max1 = fmax(engine.eng.piston_1T, fmax(engine.eng.piston_2T, fmax(engine.eng.piston_3T, fmax(engine.eng.piston_4T, fmax(engine.eng.piston_5T, engine.eng.piston_6T)))));
+            float max2 = fmax(engine.eng.piston_1L, fmax(engine.eng.piston_2L, fmax(engine.eng.piston_3L, fmax(engine.eng.piston_4L, fmax(engine.eng.piston_5L, engine.eng.piston_6L)))));
+            float mmax = fmax(max1, max2);
+
+            printf("%.3f", mmax);
+
+            if (mmax >= var.stdpiston_nissan || mmax <= var.limitstd_nissan) {
+            printf("\nBy the moment it doesn't need to be rectified.");
+            }
+            else if (mmax >= var.limitstd_nissan && mmax <= var.toten) {
+                printf("\nRectification to 0.10mm.");
+            }
+            else if (mmax > var.toten && mmax <= var.totwenty) {
+                printf("\nRectification to 0.20mm.");
+            }
+            else if (mmax > var.totwenty && mmax <= var.tothirty) {
+                printf("\nRectification to 0.30mm.");
+            }
+            else {
+                printf("\nIt's better to change pieces and recover monoblock glass...");
+            }
+            break;
+        }
+        case 8: {
+            printf("\nPiston 1 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_1T, &engine.eng.piston_1L);
+
+            printf("\nPiston 2 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_2T, &engine.eng.piston_2L);
+
+            printf("\nPiston 3 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_3T, &engine.eng.piston_3L);
+
+            printf("\nPiston 4 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_4T, &engine.eng.piston_4L);
+
+            printf("\nPiston 5 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_5T, &engine.eng.piston_5L);
+
+            printf("\nPiston 6 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_6T, &engine.eng.piston_6L);
+
+            printf("\nPiston 6 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_7T, &engine.eng.piston_7L);
+
+            printf("\nPiston 6 Measurements Transverse and Long: ");
+            scanf("%f %f", &engine.eng.piston_8T, &engine.eng.piston_8L);
+
+            float max1 = fmax(engine.eng.piston_1T, fmax(engine.eng.piston_2T, fmax(engine.eng.piston_3T, fmax(engine.eng.piston_4T, fmax(engine.eng.piston_5T, fmax(engine.eng.piston_6T, fmax(engine.eng.piston_7T, engine.eng.piston_8T)))))));
+            float max2 = fmax(engine.eng.piston_1L, fmax(engine.eng.piston_2L, fmax(engine.eng.piston_3L, fmax(engine.eng.piston_4L, fmax(engine.eng.piston_5L, fmax(engine.eng.piston_6L, fmax(engine.eng.piston_7L, engine.eng.piston_8L)))))));
+            float mmax = fmax(max1, max2);
+
+            printf("%f", mmax);
+
+            if (mmax >= var.stdpiston_nissan || mmax <= var.limitstd_nissan) {
+            printf("\nBy the moment it doesn't need to be rectified.");
+            }
+            else if (mmax >= var.limitstd_nissan && mmax <= var.toten) {
+                printf("\nRectification to 0.10mm.");
+            }
+            else if (mmax > var.toten && mmax <= var.totwenty) {
+                printf("\nRectification to 0.20mm.");
+            }
+            else if (mmax > var.totwenty && mmax <= var.tothirty) {
+                printf("\nRectification to 0.30mm.");
+            }
+            else {
+                printf("\nIt's better to change pieces and recover monoblock glass...");
+            }
+            break;
+        }
     }
-    
-    system("pause");
+    return 0;
 }
 
 char saveprogress(Clients *user);
@@ -226,57 +409,71 @@ char process(Clients *user) {
     printf("The engine is already clean? Y[1]/N[2] ");
     scanf("%s", user->works.wash);
 
-    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    printf("\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
     if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
     }
+    if (o == 1) {
+        saveprogress(user);
+    }
     if (o == 2) {
         saveprogress(user);
         return 0;
     }
 
-    printf("\n\nLarges are already taked? Y[1]/N[2] ");
+    printf("\nLarges are already taked? Y[1]/N[2] ");
     scanf("%s", user->works.larges);
 
-    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    recti();
+
+    printf("\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
     if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
     }
+    if (o == 1) {
+        saveprogress(user);
+    }
     if (o == 2) {
         saveprogress(user);
         return 0;
     }
 
-    printf("\n\nRectification is already did it? Y[1]/N[2] ");
+    printf("\nRectification is already did it? Y[1]/N[2] ");
     scanf("%s", user->works.rect);
 
-    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    printf("\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
     if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
+    }
+    if (o == 1) {
+        saveprogress(user);
     }
     if (o == 2) {
         saveprogress(user);
         return 0;
     }
 
-    printf("\n\nReady to deliver? Y[1]/N[2] ");
+    printf("\nReady to deliver? Y[1]/N[2] ");
     scanf("%s", user->works.deliver);
 
-    printf("\n\nDo you want to continue? Y[1]/N[2] ");
+    printf("\nDo you want to continue? Y[1]/N[2] ");
     ret = scanf("%d", &o);
     while (getchar() != '\n');
     if (ret != 1) {
         printf("Invalid option, please put a number... ");
         fgets(buffer, sizeof(buffer), stdin);
+    }
+    if (o == 1) {
+        saveprogress(user);
     }
     if (o == 2) {
         saveprogress(user);
@@ -290,7 +487,7 @@ char process(Clients *user) {
 char saveprogress(Clients *user) {
     FILE *ft = fopen ("progress.txt", "a");
     if (ft != NULL) {
-        fprintf (ft, "Client: %s Ready_Washed Y[1]/N[2]: %s Ready_TakeLarges Y[1]/N[2]: %s\n", user->name_clt, user->works.wash, user->works.larges);
+        fprintf (ft, "Client: %s Ready_Washed Y[1]/N[2]: %s Ready_TakeLarges Y[1]/N[2]: %s Ready_Recty: %s Ready_Deliver: %s\n", user->name_clt, user->works.wash, user->works.larges);
         fclose(ft);
     }
 
@@ -334,7 +531,7 @@ int cost(Clients user) {
             total += repairs[j].cost_repair;
             repairs[j].time = hrs;
             repairs[j].p_Hrs = 172.87 * (1 + IVA);
-            fprintf(ticket, "\tID Reparacion: %d  Name: %s\n\n", id, repairs[j].repair);
+            fprintf(ticket, "\tID Reparacion: %d  Reapair Name: %s\n\n", id, repairs[j].repair);
             break;
         }
     }
@@ -342,8 +539,8 @@ int cost(Clients user) {
     fprintf(ticket, "\tClient Name: %s\n", user.name_clt);
     fprintf(ticket, "\tHoras trabajadas: %d\n", hrs);
     fprintf(ticket, "\tSubtotal: %.2f\n", total / 1.15);
-    fprintf(ticket, "\tIVA: %.2f\n", total * 0.15);
-    fprintf(ticket, "Total: %.2f\n", total);
+    fprintf(ticket, "\tIVA: %.2f\n\n", total * 0.15);
+    fprintf(ticket, "\t\tTotal: %.2f\n", total);
 
     fclose(file);
     fclose(ticket);
