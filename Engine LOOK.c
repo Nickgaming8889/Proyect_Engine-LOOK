@@ -697,10 +697,7 @@ int Prices() {
     printf("Read %d articles:\n", i);
 
     for (int j = 0; j < i; j++) {
-        printf("Article %d:\n", j+1);
-        printf("ID: %d\n", articles[j].id);
-        printf("Name: %s\n", articles[j].name);
-        printf("Price: %.2f\n", articles[j].price);
+        printf("ID: %d Name: %s Parts: %d Price: %.2f\n", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
     }
 
     return 0;
