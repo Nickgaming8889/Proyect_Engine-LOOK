@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         i++;
     }
 
-    fclose(file);
+    
 
     int o;
 
@@ -64,14 +64,14 @@ int main(int argc, char *argv[]) {
                 }
 
                 articles[j].num_part -= new_quantity;
-                float cost = new_quantity * articles[j].price;
+                float cost = -new_quantity * articles[j].price;
 
                 fseek(file, ftell(file)-sizeof(Article), SEEK_SET);
                 fprintf(file, "%d %s %d %.2f", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
 
                 printf("New quatity for article %d (%s): %d Cost: %2f", article_id, articles[j].name, articles[j].num_part, cost);
 
-                printf("\n\nDo you want to continue buying articles? y(1)/n(2) ");
+                printf("\n\nDo you want to continue? y(1)/n(2) ");
                 ret = scanf("%d", &o);
                 while (getchar() != '\n');
                 if (ret != 1) {
@@ -88,6 +88,8 @@ int main(int argc, char *argv[]) {
         }
 
     }while (o != 2);
+
+    fclose(file);
 
     return 0;
 }

@@ -493,6 +493,8 @@ char saveprogress(Clients *user) {
 
     return 0;
 }
+
+//Generacion del Ticket...
 int cost(Clients user) {
 
     FILE *file = fopen("example2.txt", "r");
@@ -677,6 +679,8 @@ int Registro() {
 
 //Lista de precios y articulos...
 int Prices() {
+    int ret;
+    char buffer[100];
     
     FILE *file = fopen("example.txt", "r");
     if (file == NULL) {
@@ -688,21 +692,79 @@ int Prices() {
     int i = 0;
 
     while (!feof(file)) {
-        fscanf(file, "%d %s %f", &articles[i].id, articles[i].name, &articles[i].price);
+        fscanf(file, "%d %s %d %f", &articles[i].id, articles[i].name, &articles[i].num_part, &articles[i].price);
         i++;
     }
 
+    int o;
+
+    do {
+
+        printf("Read %d articles:\n", i);
+
+        for (int j = 0; j < i; j++) {
+            printf("ID: %d Name: %s Parts: %d Price: %.2f\n", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
+        }
+
+        int article_id;
+        printf("Enter article ID to search: ");
+        ret = scanf("%d", &article_id);
+        while (getchar() != '\n');
+        if (ret != 1) {
+            printf("Invalid option, please put a number... ");
+            fgets(buffer, sizeof(buffer), stdin);
+            //continue;
+        }
+
+        for (int j = 0; j < i; j++) {
+            if (articles[j].id == article_id) {
+                printf("Article %d:\n", j+1);
+                printf("ID: %d Name: %s Parts: %d Price: %.2f\n", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
+
+                int new_quantity;
+                printf("Enter new quantity for article %d (%s): ", article_id, articles[j].name);
+
+                ret = scanf("%d", &new_quantity);
+                while (getchar() != '\n');
+                if (ret != 1) {
+                    printf("Invalid option, please put a number... ");
+                    fgets(buffer, sizeof(buffer), stdin);
+                    //continue;
+                }
+
+                articles[j].num_part -= new_quantity;
+                float cost = -new_quantity * articles[j].price;
+
+                fseek(file, ftell(file)-sizeof(Article), SEEK_SET);
+                fprintf(file, "%d %s %d %.2f", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
+
+                printf("New quatity for article %d (%s): %d Cost: %.2f", article_id, articles[j].name, articles[j].num_part, cost);
+
+                printf("\n\nDo you want to continue taking articles? y(1)/n(2) ");
+                ret = scanf("%d", &o);
+                while (getchar() != '\n');
+                if (ret != 1) {
+                    printf("Invalid option, please put a number... ");
+                    fgets(buffer, sizeof(buffer), stdin);
+                    continue;
+                }
+
+                break;
+            }
+            if (j == i-1) {
+                printf("Article not found\n");
+            }
+        }
+
+    }while (o != 2);
+
     fclose(file);
-
-    printf("Read %d articles:\n", i);
-
-    for (int j = 0; j < i; j++) {
-        printf("ID: %d Name: %s Parts: %d Price: %.2f\n", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
-    }
 
     return 0;
 }
 
+
+//Compras...
 int shop() {
     int ret;
     char buffer[100];
