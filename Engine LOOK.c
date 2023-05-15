@@ -827,7 +827,7 @@ int shop() {
                 fseek(file, ftell(file)-sizeof(Article), SEEK_SET);
                 fprintf(file, "%d %s %d %.2f", articles[j].id, articles[j].name, articles[j].num_part, articles[j].price);
 
-                printf("New quatity for article %d (%s): %d Cost: %2f", article_id, articles[j].name, articles[j].num_part, cost);
+                printf("New quatity for article %d (%s): %d Cost: %.2f", article_id, articles[j].name, articles[j].num_part, cost);
 
                 printf("\n\nDo you want to continue buying articles? y(1)/n(2) ");
                 ret = scanf("%d", &o);
