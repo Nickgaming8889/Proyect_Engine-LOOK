@@ -70,7 +70,7 @@ typedef struct {
     float tothirty;
 }RorN;
 
-//GOTOXY
+//GOTOXY, permite poner cualquier cosas en cualquier lugar de la consola
 void gotoxy(int x,int y){
 
     HANDLE Ventana;
@@ -111,6 +111,7 @@ int logo(){
     return 0;
 }
 
+//Temporizador...
 int Timer() {
     int total = 100;
     int i;
@@ -134,7 +135,7 @@ int load_page() {
     gotoxy(43,4);
     printf("Loading Program...");
     gotoxy(31,6);
-    printf("Created by: Nicholas Caceres Version 1.23\n\n\t");
+    printf("Created by: Nicholas Caceres Version 1.23.");
 
     Timer();
 
@@ -221,6 +222,7 @@ char view(Clients user){
 
 RorN var;
 
+//Variables estandar para la rectificación de un motor nissan...
 float variables() {
 
     var.stdpiston_nissan = 80.465;
@@ -233,12 +235,14 @@ float variables() {
 
 Clients engine;
 
+//Función rectificación, solo cuenta con un arreglo...
 int recti() {
     int ret, num_piston;
     char buffer[100];
 
     variables();
 
+    //Seleccion del tipo de motor...
     printf("Choose how much pistons have the engine (4 to 8): ");
     ret = scanf("%d", &num_piston);
     while (getchar() != '\n');
@@ -262,6 +266,7 @@ int recti() {
             printf("\nPiston 4 Measurements Transverse and Long: ");
             scanf("%f %f", &engine.eng.piston_4T, &engine.eng.piston_4L);
 
+            //Comparación...
             float max1 = fmax(engine.eng.piston_1T, fmax(engine.eng.piston_2T, fmax(engine.eng.piston_3T, engine.eng.piston_4T)));
             float max2 = fmax(engine.eng.piston_1L, fmax(engine.eng.piston_2L, fmax(engine.eng.piston_3L, engine.eng.piston_4L)));
             float mmax = fmax(max1, max2);
@@ -783,8 +788,6 @@ int shop() {
         i++;
     }
 
-    fclose(file);
-
     int o;
 
     do {
@@ -846,9 +849,12 @@ int shop() {
         }
     } while (o != 2);
 
+    fclose(file);
+
     return 0;
 }
 
+//Función main...
 int main() {
 
     logo();
