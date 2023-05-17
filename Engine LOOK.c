@@ -573,7 +573,7 @@ int Registro() {
         printf("\n3. Search Client.");
         printf("\n4. Progress Work.");
         printf("\n5. Repair Cost.");
-        printf("\n6. Exit.");
+        printf("\n6. Go back to main menu.");
         printf("\n\nWhat do you want to do? ");
         
         ret = scanf("%d", &op);
