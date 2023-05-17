@@ -1,8 +1,9 @@
-	ID Reparacion: 1  Name: Rectify
+	ID Reparacion: 1  Reapair Name: Rectify
 
-	Client Name: tttt
+	Client Name: 2222
 
-	Horas trabajadas: 96
-	Subtotal: 18334.65
-	IVA: 3162.73
-Total: 21084.85
+	Horas trabajadas: 120
+	Subtotal: 22483.53
+	IVA: 3878.41
+
+		Total: 25856.06

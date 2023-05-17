@@ -962,6 +962,9 @@ int main() {
                     case 2:
                         system("cls");
                         printf("\nPart Shopping.\n");
+
+                            shop();
+                            
                         break;
                     case 3:
                         system("cls");
