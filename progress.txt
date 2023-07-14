@@ -1,0 +1,12 @@
+Client: tttt
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]:  Ready_Recty:  Ready_Deliver: (null)
+Client: tttt
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Ready_Recty:  Ready_Deliver: (null)
+Client: Nicolas Caceres
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]:  Ready_Recty:  Ready_Deliver: Àúiş
+Client: Nicolas Caceres
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Ready_Recty:  Ready_Deliver: Àúiş
+Client: Nicolas Caceres
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Ready_Recty:  Ready_Deliver: Àúiş
+Client: Nicolas Caceres
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Ready_Recty:  Ready_Deliver: Àúiş

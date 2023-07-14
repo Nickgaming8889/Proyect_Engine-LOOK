@@ -1,0 +1,9 @@
+	ID Reparacion: 1  Reapair Name: Rectify
+
+	Client Name: Nicolas Caceres
+
+	Horas trabajadas: 98
+	Subtotal: 18680.39
+	IVA: 3222.37
+
+		Total: 21482.45

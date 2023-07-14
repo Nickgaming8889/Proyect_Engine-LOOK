@@ -85,7 +85,7 @@ void gotoxy(int x,int y){
 
 //Función Logo...
 int logo(){
-    
+
     system("cls");
     gotoxy(42,2);
     printf("*****");
@@ -147,7 +147,7 @@ int log_in() {
 
     char user[LONGITUD + 1];
     char password[LONGITUD + 1];
-    int enter = 0, try = 0; 
+    int enter = 0, try = 0;
 
     do {
         system("cls");
@@ -167,7 +167,7 @@ int log_in() {
             system("pause");
             getchar();
         }
-        
+
     }while (try < INTENTOS && enter == 0);
 
     if (enter == 1) {
@@ -200,7 +200,7 @@ int delete(int clientNum, Clients n_o[], int *num_clt) {
     }
     else {
         for (int i = clientNum; i < *num_clt; i++) {
-            n_o[i] = n_o[i + 1];   
+            n_o[i] = n_o[i + 1];
         }
         (*num_clt)--;
         printf("The user has been delete...");
@@ -216,7 +216,7 @@ char view(Clients user){
     printf("Year: %s\n\n", user.year);
     printf("License Plates: %s\n\n", user.plt);
     printf("Series Number: %s\n\n", user.nsm);
-    
+
     return 0;
 }
 
@@ -229,7 +229,7 @@ float variables() {
     var.limitstd_nissan = 80.515;
     var.toten = 80.565;
     var.totwenty = 80.665;
-    var.tothirty = 80.765;    
+    var.tothirty = 80.765;
     return 0;
 }
 
@@ -561,7 +561,7 @@ int Registro() {
     int ret;
 
     int op, num_clt = 0, i = 0;
-    char buffer[100]; 
+    char buffer[100];
 
     Clients newClient;
 
@@ -573,9 +573,9 @@ int Registro() {
         printf("\n3. Search Client.");
         printf("\n4. Progress Work.");
         printf("\n5. Repair Cost.");
-        printf("\n6. Exit.");
+        printf("\n6. Go back to main menu.");
         printf("\n\nWhat do you want to do? ");
-        
+
         ret = scanf("%d", &op);
         while (getchar() != '\n');
         if (ret != 1) {
@@ -656,7 +656,7 @@ int Registro() {
 
                 break;
             }
-            case 5: { 
+            case 5: {
                 printf("Repair Cost: ");
                 int clientNum;
 
@@ -686,7 +686,7 @@ int Registro() {
 int Prices() {
     int ret;
     char buffer[100];
-    
+
     FILE *file = fopen("example.txt", "r");
     if (file == NULL) {
         printf("Error opening file");
@@ -773,7 +773,7 @@ int Prices() {
 int shop() {
     int ret;
     char buffer[100];
-    
+
     FILE *file = fopen("example.txt", "r+");
     if (file == NULL) {
         printf("Error opening file");
@@ -815,7 +815,7 @@ int shop() {
 
                 int new_quantity;
                 printf("Enter new quantity for article %d (%s): ", article_id, articles[j].name);
-          
+
                 ret = scanf("%d", &new_quantity);
                 while (getchar() != '\n');
                 if (ret != 1) {
@@ -897,10 +897,10 @@ int main() {
                 {
                     printf("\n1. Regist, Remove Client, Progress and Repair Price.");
                     printf("\n2. Go back principal menu.");
-                    
+
                     //Solicitar dato de entrada al area requerida...
                     printf("\n\nSeleccione la opcion que necesite: ");
-                    
+
                     ret = scanf("%d", &op);
                     while (getchar() != '\n');
                     if (ret != 1) {
@@ -917,7 +917,7 @@ int main() {
                             //while (getchar() != '\n');
                             Registro();
 
-                        break; 
+                        break;
                     case 2:
                         system("cls");
                         goto main_menu;
@@ -928,7 +928,7 @@ int main() {
                     }
 
                 } while (op != 2);
-                
+
             break;
         case 2:
             system("cls");
@@ -948,8 +948,8 @@ int main() {
                         printf("Invalid option, please put a number... ");
                         fgets(buffer, sizeof(buffer), stdin);
                         continue;
-                    }   
-                    
+                    }
+
                     //Caso según la opción elegida...
                     switch (op) {
                     case 1:
@@ -957,7 +957,7 @@ int main() {
                         printf("\nStore.\n");
 
                             Prices();
-                            
+
                         break;
                     case 2:
                         system("cls");
@@ -982,7 +982,7 @@ int main() {
             break;
         }
     } while (op != 3);
-    
+
 
     return 0;
 }
