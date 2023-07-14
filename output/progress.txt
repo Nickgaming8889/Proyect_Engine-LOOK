@@ -28,3 +28,11 @@ Client: tttt
  Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1
 Client: tttt
  Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1
+Client: 2222
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]:  Ready_Recty:  Ready_Deliver: Àú¨-ø
+Client: 2222
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Ready_Recty:  Ready_Deliver: Àú¨-ø
+Client: 2222
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Ready_Recty:  Ready_Deliver: Àú¨-ø
+Client: 2222
+ Ready_Washed Y[1]/N[2]: 1 Ready_TakeLarges Y[1]/N[2]: 1 Ready_Recty:  Ready_Deliver: Àú¨-ø
